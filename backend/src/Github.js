@@ -71,6 +71,14 @@ class Github {
         return Promise.all(repos.map(getCommits));
       });
   }
+
+  userLoc(username) {
+    return this.repos(username)
+      .then((repos) => {
+        const getCommits = repo => this.repoLoc(repo.full_name);
+        return Promise.all(repos.map(getLoc));
+      });
+  }
 }
 
 module.exports = Github;

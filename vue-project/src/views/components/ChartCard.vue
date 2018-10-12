@@ -11,6 +11,7 @@ export default {
   components: {
     PieChart
   },
+  props: ['endpoint'],
   data () {
     return {
       datacollection: null
