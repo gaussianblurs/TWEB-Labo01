@@ -1,11 +1,11 @@
 <template>
-  <div class="">
-    <PieChart :data="datacollection"></PieChart>
+  <div>
+    <pie-chart :chart-data="datacollection"></pie-chart>
   </div>
 </template>
 
 <script>
-import { PieChart } from './PieChart.js'
+import PieChart from './PieChart.js'
 export default {
   name: 'ChartCard',
   components: {
