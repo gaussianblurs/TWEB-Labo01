@@ -1,8 +1,8 @@
-import { Pie, mixins } from 'vue-chartjs'
+import { Radar, mixins } from 'vue-chartjs'
 const { reactiveProp } = mixins
 
 export default {
-  extends: Pie,
+  extends: Radar,
   mixins: [reactiveProp],
   props: ['options'],
   mounted () {
