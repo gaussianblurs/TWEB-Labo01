@@ -20,7 +20,7 @@ export default {
       if(this.url.length == 0) {
         return null
       } else {
-        var re = /((https:\/\/github\.com\/)|(git@github\.com:\/\/))([\w\.@\:\/\-~]+)(\.git)/
+        var re = /((https:\/\/github\.com\/)|(git@github\.com:))([\w\.@\:\/\-~]+)(\.git)/
         var valid = re.test(this.url)
         return valid
       }
