@@ -23,31 +23,33 @@ export default {
   },
   mounted () {
     this.fetchData()
-    .then(this.fillData())
+    .then(() => this.fillData())
   },
   methods: {
     fetchData () {
       return axios.get(`/commits/${this.username}`)
       .then((response) => {
-        this.rawData = response
-        console.log(`fetchData(): this.rawData: ${this.rawData}`)
+        this.rawData = response.data
       })
       .catch(error => console.error(error))
     },
     fillData () {
-      console.log(`fillData(): this.rawData: ${this.rawData}`)
       let labels = []
-      let datasets = []
+      let data = []
       for(let i = 0; i < this.rawData.reposCommits.length; i++) {
         let repoCommit = this.rawData.reposCommits[i]
         labels.push(repoCommit.repoName)
-        datasets.push(repoCommit.userCommits)
+        data.push(repoCommit.userCommits.length)
       }
       this.dataCollection = {
         labels,
-        datasets
+        datasets: [
+          {
+            label: "commits",
+            data
+          }
+        ]
       }
-      console.log(`fillData(): datacollection: ${this.dataCollection}`)
     }
   }
 };
