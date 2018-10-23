@@ -1,14 +1,12 @@
 <template>
-  <b-card :title="title"
-    style="max-width: 20rem;"
-    class="mb-2">
+  <b-card :title="title" class="mb-2">
     <radar-chart :chart-data="dataCollection"></radar-chart>
   </b-card>
 </template>
 
 <script>
-import RadarChart from './RadarChart.js'
 import axios from '../../HTTP'
+import RadarChart from './RadarChart.js'
 
 export default {
   components: {
