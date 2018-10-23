@@ -1,4 +1,5 @@
 import axios from 'axios'
+import NProgress from 'nprogress'
 
 // create a new axios instance
 const instance = axios.create({
