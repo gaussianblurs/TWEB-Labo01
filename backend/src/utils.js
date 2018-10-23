@@ -18,7 +18,7 @@ function getReposCommitsStats(userReposCommits = {}) {
   }
   const countCommitsForUser = o => {
     const userCommits = o.commits.reduce((acc, value) => {
-      if (value.author && value.author.login === userReposCommits.username) {
+      if (value.author && value.author.login !== userReposCommits.username) {
         return acc
       }
       return [...acc, value]

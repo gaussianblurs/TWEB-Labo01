@@ -23,14 +23,15 @@ export default {
   },
   mounted () {
     this.fetchData()
-    .then(this.fillData())
+    .then(() => this.fillData())
   },
   methods: {
     fetchData () {
+      console.log(`fetchData(): this.rawData: ${this.rawData}`)
       return axios.get(`/commits/${this.username}`)
       .then((response) => {
-        this.rawData = response
-        console.log(`fetchData(): this.rawData: ${this.rawData}`)
+        this.rawData = response.data
+        console.log(response.data);
       })
       .catch(error => console.error(error))
     },
@@ -47,7 +48,6 @@ export default {
         labels,
         datasets
       }
-      console.log(`fillData(): datacollection: ${this.dataCollection}`)
     }
   }
 };

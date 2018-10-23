@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Homepage from "./views/Homepage";
+import Callback from "./views/Callback";
 import Stats from "./views/Stats";
 
 Vue.use(Router);
@@ -8,12 +9,19 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: "/home",
+      path: "/",
       name: "homepage",
-      component: Homepage
+      component: Homepage,
+      props: true
     },
     {
-      path: "/",
+      path: "/callback",
+      name: "callback",
+      component: Callback,
+      props: true
+    },
+    {
+      path: "/stats",
       name: "stats",
       component: Stats
     }

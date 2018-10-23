@@ -8,7 +8,7 @@
       <b-card-group
         deck
         class="my-4">
-        <commits-radar-chart-card title="Card 1" username="gaussianblurs"></commits-radar-chart-card>
+        <commits-radar-chart-card class="my-4"> title="Card 1" username="gaussianblurs"></commits-radar-chart-card>
       </b-card-group>
       <b-card-group
         deck

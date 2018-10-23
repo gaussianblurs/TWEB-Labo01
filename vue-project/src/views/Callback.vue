@@ -4,7 +4,7 @@
       <!-- <div class="logo">
         <img src="../assets/githubdoctor.svg">
       </div> -->
-      <RepoForm :auth='false'></RepoForm>
+      <RepoForm :auth='true'></RepoForm>
     </div>
   </b-container>
 </template>
@@ -12,7 +12,7 @@
 <script>
 import RepoForm from "./components/RepoForm";
 export default {
-  name: "homepage",
+  name: "callback",
   components: {
     RepoForm
   }
