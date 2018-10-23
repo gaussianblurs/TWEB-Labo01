@@ -1,1 +1,7 @@
 @import "~bootstrap/scss/bootstrap.scss";
+
+#nprogress {
+  .bar {
+    height: 4px;
+  }
+}
