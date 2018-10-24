@@ -4,7 +4,7 @@
       <!-- <div class="logo">
         <img src="../assets/githubdoctor.svg">
       </div> -->
-      <RepoForm :auth='false'></RepoForm>
+      <RepoForm :code='this.$route.query.code'></RepoForm>
     </div>
   </b-container>
 </template>
