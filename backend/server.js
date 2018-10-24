@@ -20,7 +20,7 @@ app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-
     body: `code=${req.code}`,
   }
 
-  fetch('https://github.com/login/oauth/access_token', options)
+  fetch('https://github.com/login/oauth/access_token/', options)
     .then(response => response.json())
     .then(json => console.log(json)) // eslint-disable-line no-console
 })

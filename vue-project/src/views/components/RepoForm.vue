@@ -34,11 +34,11 @@ export default {
   methods: {
     fetchToken () {
       console.log('fetchToken()')
-      return axios.get(`/commits/${this.code}`)
-      .then((response) => {
-        // TODO save token
-      })
-      .catch(error => console.error(error))
+      // return axios.get(`/authenticate`)
+      // .then((response) => {
+      //   // TODO save token
+      // })
+      // .catch(error => console.error(error))
     }
   },
   computed: {
