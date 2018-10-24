@@ -1,27 +1,46 @@
 <template>
-  <div class="form-container">
-    <b-form-group
-      description="Enter a GitHub username to get sweet stats."
-      label="GitHub username"
-      label-for="input"
-      :invalid-feedback="invalidFeedback"
-      :valid-feedback="validFeedback"
-      :state="null"
-    >
-      <b-form-input id="input" :state="state" v-model.trim="url" placeholder="" ></b-form-input>
-    </b-form-group>
-    <div v-if="this.code !== null">
-      <b-button class="form-button" variant="outline-primary" href="https://github.com/login/oauth/authorize?scope=user:email&client_id=404158819bf74ed09ba6">
-        Login
-      </b-button>
+  <div>
+    <div v-if="!this.code">
+      <div class="text-center">
+        <b-button class="login-button" variant="outline-dark" href="https://github.com/login/oauth/authorize?scope=user:email&client_id=404158819bf74ed09ba6">
+          <span class="logo-github">
+            <font-awesome-icon :icon="['fab', 'github']" />
+          </span>
+          <span class="text-login">Login with GitHub</span>
+        </b-button>
+        <p>Authenticate to get sweet stats about GitHub users.</p>
+      </div>
     </div>
-
+    <div v-else>
+      <div class="form-container">
+        <b-form-group
+          description="Enter a GitHub username to get sweet stats."
+          label="GitHub username"
+          label-for="input"
+          :invalid-feedback="invalidFeedback"
+          :valid-feedback="validFeedback"
+          :state="null"
+        >
+          <b-form-input id="input" :state="state" v-model.trim="username" placeholder="" ></b-form-input>
+        </b-form-group>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: ['code'],
+  methods: {
+    fetchToken () {
+      console.log('fetchToken()')
+      return axios.get(`/commits/${this.code}`)
+      .then((response) => {
+        // TODO save token
+      })
+      .catch(error => console.error(error))
+    }
+  },
   computed: {
     state () {
       if(this.username.length == 0) {
@@ -29,7 +48,8 @@ export default {
       } else {
         // var re = /((https:\/\/github\.com\/)|(git@github\.com:))([\w\.@\:\/\-~]+)(\.git)/
         // var valid = re.test(this.url)
-        return this.code
+        console.log(`code: ${this.code}`)
+        return this.code ? true : false
       }
     },
     invalidFeedback () {
