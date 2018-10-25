@@ -8,7 +8,7 @@ const utils = require('./src/utils')
 
 const app = express()
 const port = process.env.PORT || 3000
-const client = new Github({ token: process.env.OAUTH_TOKEN })
+const client = new Github()
 
 // Enable CORS for the client app
 app.use(cors())
@@ -16,46 +16,43 @@ app.use(cors())
 app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-vars
   const options = {
     method: 'POST',
+    headers: { Accept: 'application/json' },
   }
   const url = new URL('https://github.com/login/oauth/access_token/')
   const params = {
     client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
     code: req.query.code,
   }
 
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-
-  console.log(url) // eslint-disable-line no-console
-
   fetch(url, options)
     .then(response => response.json())
-    .then(json => console.log(json)) // eslint-disable-line no-console
-    .catch(next)
+    .then(body => res.send(body))
 })
 
 app.get('/users/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
-  client.user(req.params.username)
+  client.user(req.query.token, req.params.username)
     .then(user => res.send(user))
     .catch(next)
 })
 
 app.get('/languages/:username', (req, res, next) => {
-  client.userLanguages(req.params.username)
+  client.userLanguages(req.query.token, req.params.username)
     .then(utils.getReposLanguagesStats)
     .then(stats => res.send(stats))
     .catch(next)
 })
 
 app.get('/commits/:username', (req, res, next) => {
-  client.userCommits(req.params.username)
+  client.userCommits(req.query.token, req.params.username)
     .then(utils.getReposCommitsStats)
     .then(stats => res.send(stats))
     .catch(next)
 })
 
 app.get('/weekly_commits/:username', (req, res, next) => {
-  client.lastThreeWeeksuserCommits(req.params.username)
+  client.lastThreeWeeksuserCommits(req.query.token, req.params.username)
     .then(utils.getWeeklyCommitsStats)
     .then(stats => res.send(stats))
     .catch(next)

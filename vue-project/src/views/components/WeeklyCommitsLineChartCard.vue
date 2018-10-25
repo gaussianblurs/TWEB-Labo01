@@ -26,10 +26,10 @@ export default {
   },
   methods: {
     fetchData () {
-      return axios.get(`/weekly_commits/${this.username}`)
+      let token = window.localStorage.getItem('access_token')
+      return axios.get(`/weekly_commits/${this.username}?token=${token}`)
       .then((response) => {
         this.rawData = response.data
-        console.log(this.rawData)
       })
       .catch(error => console.error(error))
     },
