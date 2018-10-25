@@ -22,7 +22,6 @@ export default {
   props: ['code'],
   methods: {
     fetchToken () {
-      console.log(`/authenticate/?code=${this.code}`)
       return axios.get(`/authenticate/?code=${this.code}`)
       .then((response) => {
         window.localStorage.setItem('access_token', response.data.access_token);
@@ -31,6 +30,7 @@ export default {
     }
   },
   mounted () {
+    console.log(`/authenticate/?code=${this.code}`)
     this.fetchToken()
     .then(() => console.log('done'))
   },
