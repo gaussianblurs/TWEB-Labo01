@@ -4,17 +4,17 @@
       <div class="logo">
         <img src="../assets/logo.svg">
       </div>
-      <Login></Login>
+      <RepoForm :code='this.$route.query.code'></RepoForm>
     </div>
   </b-container>
 </template>
 
 <script>
-import Login from "./components/Login";
+import RepoForm from "./components/RepoForm";
 export default {
   name: "homepage",
   components: {
-    Login
+    RepoForm
   }
 };
 </script>
