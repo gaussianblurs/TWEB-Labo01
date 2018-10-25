@@ -29,26 +29,29 @@
 </template>
 
 <script>
+import axios from '../../HTTP'
+
 export default {
   props: ['code'],
   methods: {
     fetchToken () {
-      console.log('fetchToken()')
-      // return axios.get(`/authenticate`)
-      // .then((response) => {
-      //   // TODO save token
-      // })
-      // .catch(error => console.error(error))
+      console.log(`fetchToken(${this.code})`)
+      return axios.get(`/authenticate/?code=${this.code}`)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(error => console.error(error))
     }
+  },
+  mounted () {
+    this.fetchToken()
+    .then(() => console.log('done'))
   },
   computed: {
     state () {
       if(this.username.length == 0) {
         return null
       } else {
-        // var re = /((https:\/\/github\.com\/)|(git@github\.com:))([\w\.@\:\/\-~]+)(\.git)/
-        // var valid = re.test(this.url)
-        console.log(`code: ${this.code}`)
         return this.code ? true : false
       }
     },

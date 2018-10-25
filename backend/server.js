@@ -14,15 +14,24 @@ const client = new Github({ token: process.env.OAUTH_TOKEN })
 app.use(cors())
 
 app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-vars
-  // TODO get token
   const options = {
     method: 'POST',
-    body: `code=${req.code}`,
+  }
+  const url = new URL('https://github.com/login/oauth/access_token/')
+  const params = {
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_ID,
+    code: req.query.code,
   }
 
-  fetch('https://github.com/login/oauth/access_token/', options)
+  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+  console.log(url) // eslint-disable-line no-console
+
+  fetch(url, options)
     .then(response => response.json())
     .then(json => console.log(json)) // eslint-disable-line no-console
+    .catch(next)
 })
 
 app.get('/users/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
