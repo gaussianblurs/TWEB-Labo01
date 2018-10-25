@@ -12,22 +12,29 @@ const client = new Github({ token: process.env.OAUTH_TOKEN })
 // Enable CORS for the client app
 app.use(cors())
 
-app.get('/users/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
+app.get('/users/:username', (req, res, next) => {
   client.user(req.params.username)
     .then(user => res.send(user))
     .catch(next)
 })
 
-app.get('/languages/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
+app.get('/languages/:username', (req, res, next) => {
   client.userLanguages(req.params.username)
     .then(utils.getReposLanguagesStats)
     .then(stats => res.send(stats))
     .catch(next)
 })
 
-app.get('/commits/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
+app.get('/commits/:username', (req, res, next) => {
   client.userCommits(req.params.username)
     .then(utils.getReposCommitsStats)
+    .then(stats => res.send(stats))
+    .catch(next)
+})
+
+app.get('/weekly_commits/:username', (req, res, next) => {
+  client.lastThreeWeeksuserCommits(req.params.username)
+    .then(utils.getWeeklyCommitsStats)
     .then(stats => res.send(stats))
     .catch(next)
 })
