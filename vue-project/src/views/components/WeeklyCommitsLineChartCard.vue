@@ -1,22 +1,23 @@
 <template>
   <b-card :title="title" class="mb-2">
-    <radar-chart :chart-data="dataCollection"></radar-chart>
+    <line-chart :chart-data="dataCollection" :options="options"></line-chart>
   </b-card>
 </template>
 
 <script>
 import axios from '../../HTTP'
-import RadarChart from './charts/RadarChart'
+import LineChart from './charts/LineChart'
 
 export default {
   components: {
-    RadarChart
+    LineChart
   },
   props: ['title', 'username'],
   data () {
     return {
       rawData: null,
-      dataCollection: null
+      dataCollection: null,
+      options: null
     }
   },
   mounted () {
@@ -25,32 +26,35 @@ export default {
   },
   methods: {
     fetchData () {
-      return axios.get(`/commits/${this.username}`)
+      return axios.get(`/weekly_commits/${this.username}`)
       .then((response) => {
         this.rawData = response.data
+        console.log(this.rawData)
       })
       .catch(error => console.error(error))
     },
     fillData () {
-      let labels = []
-      let data = []
-      for(let i = 0; i < this.rawData.reposCommits.length; i++) {
-        let repoCommit = this.rawData.reposCommits[i]
-        labels.push(repoCommit.repoName)
-        data.push(repoCommit.userCommits.length)
-      }
       this.dataCollection = {
-        labels,
         datasets: [
           {
-            label: "commits",
-            data
+            data: []
           }
-        ]
+        ],
+      }
+      // TODO fill data
+      this.options = {
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              unit: 'week'
+            }
+          }]
+        }
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

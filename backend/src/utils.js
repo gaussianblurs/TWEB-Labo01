@@ -11,28 +11,40 @@ function getReposLanguagesStats(reposLanguages = []) {
   return stats
 }
 
-function getReposCommitsStats(userReposCommits = {}) {
-  const stats = {
-    username: userReposCommits.username,
-    reposCommits: [],
-  }
+function getReposCommitsStats(reposCommits = []) {
+  const stats = []
   const countCommitsForUser = o => {
-    const userCommits = o.commits.reduce((acc, value) => {
-      if (value.author && value.author.login !== userReposCommits.username) {
+    const commits = o.commits.reduce((acc, value) => {
+      if (value.author && value.author.login !== reposCommits.username) {
         return acc
       }
       return [...acc, value]
     }, [])
-    stats.reposCommits.push({
+    stats.push({
       repoName: o.repoName,
-      userCommits,
+      commits,
     })
   }
-  userReposCommits.repoCommits.forEach(countCommitsForUser)
+  reposCommits.forEach(countCommitsForUser)
+  return stats
+}
+
+function getWeeklyCommitsStats(reposWeeklyCommits = []) {
+  const stats = {}
+  const countCommits = o => {
+    o.commits.forEach((commit) => {
+      let { date } = commit.commit.author
+      date = date.substring(0, date.indexOf('T'))
+      const current = stats[date] || 0
+      stats[date] = current + 1
+    })
+  }
+  reposWeeklyCommits.forEach(countCommits)
   return stats
 }
 
 module.exports = {
   getReposLanguagesStats,
   getReposCommitsStats,
+  getWeeklyCommitsStats,
 }
