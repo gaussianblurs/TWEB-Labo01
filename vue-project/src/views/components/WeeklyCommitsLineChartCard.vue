@@ -37,6 +37,7 @@ export default {
       this.dataCollection = {
         datasets: [
           {
+            label: "Total commits",
             data: []
           }
         ],

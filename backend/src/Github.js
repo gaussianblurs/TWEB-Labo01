@@ -63,18 +63,6 @@ class Github {
       })
   }
 
-  userCommits(token, username) {
-    return this.repos(token, username)
-      .then((repos) => {
-        const getCommits = async repo => ({
-          repoName: repo.full_name,
-          commits:
-            await this.repoUserCommits(token, username, repo.full_name),
-        })
-        return Promise.all(repos.map(getCommits))
-      })
-  }
-
   lastThreeWeeksuserCommits(token, username) {
     const d = new Date()
     d.setDate(d.getDate() - 21)
