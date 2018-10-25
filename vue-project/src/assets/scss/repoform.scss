@@ -5,6 +5,7 @@
   border-color: black;
   width: 400px;
   padding: 15px 20px 0px 20px;
+  text-align: left;
 
   @media (max-width: 576px) {
     width: 350px;
@@ -15,6 +16,19 @@
   background-color: transparent;
 }
 
-.form-button {
+.login-button {
+  margin: 0;
   margin-bottom: 20px;
+  padding: 5px 15px 5px 15px;
+  justify-content: center;
+
+  .logo-github {
+    vertical-align:middle;
+    font-size: 30px;
+    margin-right: 10px;
+  }
+  .text-login {
+    vertical-align:middle;
+    font-size: 20px;
+  }
 }

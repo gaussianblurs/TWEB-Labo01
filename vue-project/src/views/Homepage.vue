@@ -1,10 +1,10 @@
 <template>
   <b-container fluid class="main-container">
-    <div class="wrapper justify-content-center">
-      <!-- <div class="logo">
-        <img src="../assets/githubdoctor.svg">
-      </div> -->
-      <RepoForm :auth='false'></RepoForm>
+    <div class="wrapper">
+      <div class="logo">
+        <img src="../assets/logo.svg">
+      </div>
+      <RepoForm :code='this.$route.query.code'></RepoForm>
     </div>
   </b-container>
 </template>

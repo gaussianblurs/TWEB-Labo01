@@ -1,5 +1,6 @@
 // loads environment variables
 require('dotenv/config')
+const fetch = require('node-fetch')
 const express = require('express')
 const cors = require('cors')
 const Github = require('./src/Github')
@@ -12,7 +13,19 @@ const client = new Github({ token: process.env.OAUTH_TOKEN })
 // Enable CORS for the client app
 app.use(cors())
 
-app.get('/users/:username', (req, res, next) => {
+app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-vars
+  // TODO get token
+  const options = {
+    method: 'POST',
+    body: `code=${req.code}`,
+  }
+
+  fetch('https://github.com/login/oauth/access_token/', options)
+    .then(response => response.json())
+    .then(json => console.log(json)) // eslint-disable-line no-console
+})
+
+app.get('/users/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
   client.user(req.params.username)
     .then(user => res.send(user))
     .catch(next)
