@@ -25,7 +25,8 @@ export default {
   },
   methods: {
     fetchData () {
-      return axios.get(`/commits/${this.username}`)
+      let token = window.localStorage.getItem('access_token')
+      return axios.get(`/commits/${this.username}?token=${token}`)
       .then((response) => {
         this.rawData = response.data
       })
