@@ -32,7 +32,7 @@ function getReposCommitsStats(reposCommits = []) {
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
   const stats = {}
   const countCommits = o => {
-    o.commits.forEach((commit) => {
+    o.commits.forEach(commit => {
       let { date } = commit.commit.author
       date = date.substring(0, date.indexOf('T'))
       const current = stats[date] || 0
@@ -40,7 +40,16 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
     })
   }
   reposWeeklyCommits.forEach(countCommits)
-  return stats
+  const sortedDateCommits = []
+  Object.keys(stats).forEach(key => {
+    sortedDateCommits.push({ [key]: stats[key] })
+  })
+  sortedDateCommits.sort((a, b) => {
+    const date1 = Object.keys(a)[0]
+    const date2 = Object.keys(b)[0]
+    return new Date(date1) - new Date(date2)
+  })
+  return sortedDateCommits
 }
 
 module.exports = {

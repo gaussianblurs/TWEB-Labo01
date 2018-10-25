@@ -52,16 +52,12 @@ class Github {
     return this.request(`/repos/${repoName}/languages`)
   }
 
-  repoCommits(repoName) {
+  repoUserCommits(username, repoName) {
     return this.request(`/repos/${repoName}/commits`)
   }
 
-  reposCommitsSince(repoName, stringDate) {
-    return this.request(`/repos/${repoName}/commits`, {
-      headers: {
-        since: stringDate,
-      },
-    })
+  repoUserCommitsSince(username, repoName, stringDate) {
+    return this.request(`/repos/${repoName}/commits?since=${stringDate}&author=${username}`)
   }
 
   userLanguages(username) {
@@ -77,9 +73,8 @@ class Github {
       .then((repos) => {
         const getCommits = async repo => ({
           repoName: repo.full_name,
-          commits: await this.repoCommits(repo.full_name),
+          commits: await this.repoUserCommits(username, repo.full_name),
         })
-
         return Promise.all(repos.map(getCommits))
       })
   }
@@ -91,7 +86,7 @@ class Github {
       .then((repos) => {
         const getCommits = async repo => ({
           repoName: repo.full_name,
-          commits: await this.reposCommitsSince(repo.full_name, d.toISOString()),
+          commits: await this.repoUserCommitsSince(username, repo.full_name, d.toISOString()),
         })
         return Promise.all(repos.map(getCommits))
       })

@@ -41,7 +41,12 @@ export default {
           }
         ],
       }
-      // TODO fill data
+      this.rawData.forEach(commit => {
+        this.dataCollection.datasets[0].data.push({
+          t: Object.keys(commit)[0],
+          y: commit[Object.keys(commit)[0]]
+        })
+      })
       this.options = {
         scales: {
           xAxes: [{
