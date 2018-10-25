@@ -11,24 +11,6 @@ function getReposLanguagesStats(reposLanguages = []) {
   return stats
 }
 
-function getReposCommitsStats(reposCommits = []) {
-  const stats = []
-  const countCommitsForUser = o => {
-    const commits = o.commits.reduce((acc, value) => {
-      if (value.author && value.author.login !== reposCommits.username) {
-        return acc
-      }
-      return [...acc, value]
-    }, [])
-    stats.push({
-      repoName: o.repoName,
-      commits,
-    })
-  }
-  reposCommits.forEach(countCommitsForUser)
-  return stats
-}
-
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
   const stats = {}
   const countCommits = o => {
@@ -54,6 +36,5 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
 
 module.exports = {
   getReposLanguagesStats,
-  getReposCommitsStats,
   getWeeklyCommitsStats,
 }

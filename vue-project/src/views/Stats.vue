@@ -9,7 +9,6 @@
         deck
         class="my-4">
         <weekly-commits-line-chart-card class="my-4" title="Weekly commits" username="gaussianblurs"></weekly-commits-line-chart-card>
-        <commits-radar-chart-card class="my-4" title="Card 1" username="gaussianblurs"></commits-radar-chart-card>
       </b-card-group>
       <b-card-group
         deck

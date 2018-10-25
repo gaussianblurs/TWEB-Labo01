@@ -52,7 +52,7 @@ class Github {
     return this.request(`/repos/${repoName}/languages`)
   }
 
-  repoUserCommits(username, repoName) {
+  repoCommits(repoName) {
     return this.request(`/repos/${repoName}/commits`)
   }
 
@@ -65,17 +65,6 @@ class Github {
       .then((repos) => {
         const getLanguages = repo => this.repoLanguages(repo.full_name)
         return Promise.all(repos.map(getLanguages))
-      })
-  }
-
-  userCommits(username) {
-    return this.repos(username)
-      .then((repos) => {
-        const getCommits = async repo => ({
-          repoName: repo.full_name,
-          commits: await this.repoUserCommits(username, repo.full_name),
-        })
-        return Promise.all(repos.map(getCommits))
       })
   }
 
