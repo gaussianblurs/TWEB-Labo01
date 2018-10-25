@@ -8,7 +8,9 @@ function getReposLanguagesStats(reposLanguages = []) {
     })
   }
   reposLanguages.forEach(countLanguages)
-  return stats
+  return Object.keys(stats)
+    .sort((a, b) => stats[a] - stats[b])
+    .map(key => ({ [key]: stats[key] }))
 }
 
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
@@ -22,16 +24,9 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
     })
   }
   reposWeeklyCommits.forEach(countCommits)
-  const sortedDateCommits = []
-  Object.keys(stats).forEach(key => {
-    sortedDateCommits.push({ [key]: stats[key] })
-  })
-  sortedDateCommits.sort((a, b) => {
-    const date1 = Object.keys(a)[0]
-    const date2 = Object.keys(b)[0]
-    return new Date(date1) - new Date(date2)
-  })
-  return sortedDateCommits
+  return Object.keys(stats)
+    .sort((a, b) => new Date(a) - new Date(b))
+    .map(key => ({ [key]: stats[key] }))
 }
 
 module.exports = {
