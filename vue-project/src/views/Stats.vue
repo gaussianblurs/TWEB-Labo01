@@ -8,29 +8,22 @@
       <b-card-group
         deck
         class="my-4">
-        <weekly-commits-line-chart-card class="my-4" title="Weekly commits" username="gaussianblurs"></weekly-commits-line-chart-card>
+        <weekly-commits-line-chart-card class="my-4" title="Overview" username="gaussianblurs"></weekly-commits-line-chart-card>
       </b-card-group>
       <b-card-group
         deck
         class="my-4">
-        <pie-chart-card title="Card 1"></pie-chart-card>
-        <pie-chart-card title="Card 2"></pie-chart-card>
-        <pie-chart-card title="Card 3"></pie-chart-card>
       </b-card-group>
     </b-container>
   </div>
 </template>
 
 <script>
-import PieChartCard from "./components/PieChartCard"
-import CommitsRadarChartCard from "./components/CommitsRadarChartCard"
 import WeeklyCommitsLineChartCard from "./components/WeeklyCommitsLineChartCard"
 export default {
   name: 'stats',
   components: {
     WeeklyCommitsLineChartCard,
-    CommitsRadarChartCard,
-    PieChartCard,
   },
   data () {
     return {
