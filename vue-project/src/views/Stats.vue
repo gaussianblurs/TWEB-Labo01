@@ -1,19 +1,17 @@
 <template>
-  <div class="">
-    <b-navbar class="navbar-custom" type="dark" variant="info">
-      <b-navbar-brand href="#" class="mx-auto">NavBar</b-navbar-brand>
+  <div>
+    <b-navbar type="dark" variant="info">
+      <a href="#"><img class="nav-logo" src="../assets/nav-logo.svg"></a>
+      <b-nav-form>
+        <b-form-input class="mr-sm-2" type="text" placeholder="username" variant="outline-dark"/>
+        <b-button class="my-2 my-sm-0" variant="outline-dark" type="submit">Search</b-button>
+      </b-nav-form>
     </b-navbar>
 
     <b-container>
-      <b-card-group
-        deck
-        class="my-4">
-        <weekly-commits-line-chart-card class="my-4" title="Overview" username="gaussianblurs"></weekly-commits-line-chart-card>
-      </b-card-group>
-      <b-card-group
-        deck
-        class="my-4">
-      </b-card-group>
+      <div class="chart-container">
+        <weekly-commits-line-chart-card class="my-4" title="Overview" username="psrochat"></weekly-commits-line-chart-card>
+      </div>
     </b-container>
   </div>
 </template>
@@ -26,9 +24,7 @@ export default {
     WeeklyCommitsLineChartCard,
   },
   data () {
-    return {
-
-    }
+    return {}
   }
 }
 </script>

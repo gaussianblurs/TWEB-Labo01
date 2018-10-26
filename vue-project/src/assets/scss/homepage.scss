@@ -1,6 +1,8 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
 .main-container {
   height: 100vh;
-  background-color: #ecf0f1;
+  background-color: $light;
   text-align: center;
 }
 

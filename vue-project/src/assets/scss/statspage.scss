@@ -1,3 +1,17 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
 .navbar {
-  background-color: black;
+  background-color: $light !important;
+  .form-control {
+    background-color: transparent;
+    border-color: $dark;
+  }
+}
+
+.nav-logo {
+  height: 50px;
+}
+
+.chart-container {
+  background-color: $light;
 }

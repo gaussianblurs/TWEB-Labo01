@@ -1,20 +1,20 @@
 <template>
   <b-container fluid class="main-container">
-    <div class="wrapper justify-content-center">
-      <!-- <div class="logo">
-        <img src="../assets/githubdoctor.svg">
-      </div> -->
-      <RepoForm :auth='true'></RepoForm>
+    <div class="wrapper">
+      <div class="logo">
+        <img src="../assets/logo.svg">
+      </div>
+      <Form :code='this.$route.query.code'></Form>
     </div>
   </b-container>
 </template>
 
 <script>
-import RepoForm from "./components/RepoForm";
+import Form from "./components/Form";
 export default {
   name: "callback",
   components: {
-    RepoForm
+    Form
   }
 };
 </script>
