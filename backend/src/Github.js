@@ -39,8 +39,8 @@ class Github {
     return this.request(token, `/users/${username}`)
   }
 
-  repos(token, username) {
-    return this.request(token, `/users/${username}/repos`)
+  repos(token, username, type) {
+    return this.request(token, `/users/${username}/repos?type=${type}`)
   }
 
   repoLanguages(token, repoName) {
@@ -52,11 +52,11 @@ class Github {
   }
 
   repoUserCommitsSince(token, username, repoName, stringDate) {
-    return this.request(token, `/repos/${repoName}/commits?since=${stringDate}&author=${username}&type=all`)
+    return this.request(token, `/repos/${repoName}/commits?since=${stringDate}&author=${username}`)
   }
 
   userLanguages(token, username) {
-    return this.repos(token, username)
+    return this.repos(token, username, 'all')
       .then((repos) => {
         const getLanguages = repo => this.repoLanguages(token, repo.full_name)
         return Promise.all(repos.map(getLanguages))
@@ -65,8 +65,8 @@ class Github {
 
   lastThreeWeeksUserCommits(token, username) {
     const d = new Date()
-    d.setDate(d.getDate() - 21)
-    return this.repos(token, username)
+    d.setDate(d.getDate() - 365)
+    return this.repos(token, username, 'all')
       .then((repos) => {
         const getCommits = async repo => ({
           repoName: repo.full_name,

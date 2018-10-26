@@ -39,8 +39,8 @@ export default {
             backgroundColor: 'transparent',
             borderColor: '#27ae60',
             pointBackgroundColor: '#27ae60',
-            pointBorderColor: '#27ae60',
-            pointBorderWidth: 3,
+            // pointBorderColor: '#27ae60',
+            //pointBorderWidth: 3,
             data: []
           }
         ],
@@ -72,7 +72,7 @@ export default {
           xAxes: [{
             type: 'time',
             time: {
-              unit: 'day'
+              unit: 'month'
             },
             gridLines: {
             },
