@@ -42,6 +42,10 @@ class Github {
     return this.request(token, `/users/${username}/repos?type=${type}`)
   }
 
+  reposUser(token) {
+    return this.request(token, '/user/repos')
+  }
+
   repoLanguages(token, repoName) {
     return this.request(token, `/repos/${repoName}/languages`)
   }
@@ -78,7 +82,8 @@ class Github {
   lastThreeWeeksUserCommits(token, username) {
     const d = new Date()
     d.setDate(d.getDate() - 365)
-    return this.repos(token, username, 'all')
+    // return this.repos(token, username, 'all')
+    return this.reposUser(token)
       .then(res => res.json())
       .then((repos) => {
         const getCommits = async repo => ({

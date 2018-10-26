@@ -10,7 +10,7 @@
 
     <b-container>
       <div class="chart-container">
-        <weekly-commits-line-chart-card class="my-4" title="Overview" username="gaussianblurs"></weekly-commits-line-chart-card>
+        <weekly-commits-line-chart-card class="my-4" title="Overview" username="SoftEng-HEIGVD"></weekly-commits-line-chart-card>
       </div>
     </b-container>
   </div>
