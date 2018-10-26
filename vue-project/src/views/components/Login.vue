@@ -16,5 +16,5 @@
 export default {}
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/repoform.scss';
+@import '../../assets/scss/form.scss';
 </style>

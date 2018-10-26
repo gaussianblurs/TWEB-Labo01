@@ -40,6 +40,7 @@ class Github {
   }
 
   repos(token, username) {
+    this.request(token, `/users/${username}/repos`).then((repos) => console.log(repos)) // eslint-disable-line no-console
     return this.request(token, `/users/${username}/repos`)
   }
 
@@ -63,7 +64,7 @@ class Github {
       })
   }
 
-  lastThreeWeeksuserCommits(token, username) {
+  lastThreeWeeksUserCommits(token, username) {
     const d = new Date()
     d.setDate(d.getDate() - 21)
     return this.repos(token, username)

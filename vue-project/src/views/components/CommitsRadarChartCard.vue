@@ -1,7 +1,5 @@
 <template>
-  <b-card :title="title" class="mb-2">
-    <radar-chart :chart-data="dataCollection"></radar-chart>
-  </b-card>
+  <radar-chart :chart-data="dataCollection"></radar-chart>
 </template>
 
 <script>

@@ -1,7 +1,5 @@
 <template>
-  <b-card :title="title" class="mb-2">
-    <line-chart :chart-data="dataCollection" :options="options"></line-chart>
-  </b-card>
+  <line-chart :chart-data="dataCollection" :options="options"></line-chart>
 </template>
 
 <script>
@@ -37,7 +35,12 @@ export default {
       this.dataCollection = {
         datasets: [
           {
-            label: "Total commits",
+            label: "Commits",
+            backgroundColor: 'transparent',
+            borderColor: '#27ae60',
+            pointBackgroundColor: '#27ae60',
+            pointBorderColor: '#27ae60',
+            pointBorderWidth: 3,
             data: []
           }
         ],
@@ -49,12 +52,30 @@ export default {
         })
       })
       this.options = {
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          fontSize: 30,
+          text: '3 Weeks Commits'
+        },
+        legend: {
+        },
+        layout: {
+          padding: {
+            left: 30,
+            right: 30,
+            top: 10,
+            bottom: 20
+          }
+        },
         scales: {
           xAxes: [{
             type: 'time',
             time: {
-              unit: 'week'
-            }
+              unit: 'day'
+            },
+            gridLines: {
+            },
           }]
         }
       }

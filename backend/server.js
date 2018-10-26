@@ -52,7 +52,7 @@ app.get('/commits/:username', (req, res, next) => {
 })
 
 app.get('/weekly_commits/:username', (req, res, next) => {
-  client.lastThreeWeeksuserCommits(req.query.token, req.params.username)
+  client.lastThreeWeeksUserCommits(req.query.token, req.params.username)
     .then(utils.getWeeklyCommitsStats)
     .then(stats => res.send(stats))
     .catch(next)

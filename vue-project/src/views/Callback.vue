@@ -4,17 +4,17 @@
       <div class="logo">
         <img src="../assets/logo.svg">
       </div>
-      <RepoForm :code='this.$route.query.code'></RepoForm>
+      <Form :code='this.$route.query.code'></Form>
     </div>
   </b-container>
 </template>
 
 <script>
-import RepoForm from "./components/RepoForm";
+import Form from "./components/Form";
 export default {
   name: "callback",
   components: {
-    RepoForm
+    Form
   }
 };
 </script>
