@@ -51,7 +51,7 @@ class Github {
   }
 
   repoUserCommitsSince(token, username, repoName, stringDate, acc = [], page = 1) {
-    return this.request(token, `/repos/${repoName}/commits?page=${page}&per_page=10&since=${stringDate}&author=${username}`)
+    return this.request(token, `/repos/${repoName}/commits?page=${page}&per_page=100&since=${stringDate}&author=${username}`)
       .then(res => res.json()
         .then(body => {
           acc.push(body)
@@ -64,8 +64,7 @@ class Github {
             }
           }
           return [].concat(...acc)
-        })
-        .catch(err => console.error(err)))
+        }))
   }
 
   userLanguages(token, username) {
