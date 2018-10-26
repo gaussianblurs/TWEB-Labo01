@@ -66,6 +66,8 @@ export default {
           text: '3 Weeks Commits'
         },
         legend: {
+          labels: {
+          }
         },
         layout: {
           padding: {
@@ -79,7 +81,7 @@ export default {
           xAxes: [{
             type: 'time',
             time: {
-              unit: 'day'
+              unit: 'week'
             },
             gridLines: {
             },
