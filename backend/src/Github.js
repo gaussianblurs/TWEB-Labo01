@@ -40,7 +40,6 @@ class Github {
   }
 
   repos(token, username) {
-    this.request(token, `/users/${username}/repos`).then((repos) => console.log(repos)) // eslint-disable-line no-console
     return this.request(token, `/users/${username}/repos`)
   }
 
