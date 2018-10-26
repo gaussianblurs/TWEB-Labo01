@@ -1,0 +1,9 @@
+{
+  "type": "static",
+  "name": "technography",
+  "static": {
+    "rewrites": [
+      { "source": "/**", "destination": "/index.html" }
+    ]
+  }
+}

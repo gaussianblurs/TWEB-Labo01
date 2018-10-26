@@ -1,16 +1,22 @@
 <template>
   <div>
     <b-navbar type="dark" variant="info">
-      <a href="#"><img class="nav-logo" src="../assets/nav-logo.svg"></a>
+      <a><img class="nav-logo" src="../assets/nav-logo.svg"></a>
       <b-nav-form>
-        <b-form-input class="mr-sm-2" type="text" placeholder="username" variant="outline-dark"/>
-        <b-button class="my-2 my-sm-0" variant="outline-dark" type="submit">Search</b-button>
+        <b-form-group>
+          <b-form-input
+            class="mr-sm-2"
+            id="input"
+            placeholder="username"
+            @submit.prevent
+            v-model.trim="fieldUsername"
+          />
+        </b-form-group>
       </b-nav-form>
     </b-navbar>
-
     <b-container>
       <div class="chart-container">
-        <weekly-commits-line-chart-card class="my-4" title="Overview" username="paulnta"></weekly-commits-line-chart-card>
+        <weekly-commits-line-chart-card class="my-4" title="Overview" :username="username"></weekly-commits-line-chart-card>
       </div>
     </b-container>
   </div>
@@ -19,12 +25,25 @@
 <script>
 import WeeklyCommitsLineChartCard from "./components/WeeklyCommitsLineChartCard"
 export default {
-  name: 'stats',
+  props: ['username'],
   components: {
-    WeeklyCommitsLineChartCard,
+    WeeklyCommitsLineChartCard
   },
-  data () {
-    return {}
+  methods: {
+    routeToStats(event) {
+      event.preventDefault()
+      if (event.which === 13 && this.fieldUsername) {
+        this.$router.push({ name: 'stats', params: { username: this.fieldUsername }})
+      }
+    },
+  },
+  mounted() {
+    console.log(this.username)
+  },
+  data() {
+    return {
+      fieldUsername: '',
+    }
   }
 }
 </script>

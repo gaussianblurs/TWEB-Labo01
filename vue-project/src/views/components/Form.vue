@@ -2,14 +2,20 @@
   <div>
     <div class="form-container">
       <b-form-group
-      description="Enter a GitHub username to get sweet stats."
-      label="GitHub username"
-      label-for="input"
-      :invalid-feedback="invalidFeedback"
-      :valid-feedback="validFeedback"
-      :state="null"
+        description="Enter a GitHub username to get sweet stats."
+        label="GitHub username"
+        label-for="input"
+        :invalid-feedback="invalidFeedback"
+        :valid-feedback="validFeedback"
+        :state="null"
       >
-      <b-form-input id="input" :state="state" v-model.trim="username" placeholder="" ></b-form-input>
+        <b-form-input
+          id="input"
+          placeholder=""
+          :state="state"
+          @keydown.native="routeToStats"
+          v-model.trim="fieldUsername"
+        />
     </b-form-group>
   </div>
   </div>
@@ -21,21 +27,29 @@ import axios from '../../HTTP'
 export default {
   props: ['code'],
   methods: {
-    fetchToken () {
+    routeToStats(event) {
+      if (event.which === 13 && this.fieldUsername) {
+        this.$router.push({ name: 'stats', params: { username: this.fieldUsername }})
+      }
+    },
+    fetchToken() {
       return axios.get(`/authenticate/?code=${this.code}`)
       .then((response) => {
-        window.localStorage.setItem('access_token', response.data.access_token);
+        if(response.data.access_token) {
+          window.localStorage.setItem('access_token', response.data.access_token)
+        } else {
+          this.$router.push({ name: 'homepage' })
+        }
       })
       .catch(error => console.error(error))
     }
   },
   mounted () {
-    console.log(`/authenticate/?code=${this.code}`)
     this.fetchToken()
   },
   computed: {
     state () {
-      if(this.username.length == 0) {
+      if(this.fieldUsername.length == 0) {
         return null
       } else {
         return this.code ? true : false
@@ -50,7 +64,7 @@ export default {
   },
   data () {
     return {
-      username: ''
+      fieldUsername: ''
     }
   }
 }
