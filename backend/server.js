@@ -59,7 +59,6 @@ app.get('/weekly_commits/:username', (req, res, next) => {
 })
 
 app.get('/test/:username', (req, res, next) => {
-  // client.repoUserCommitsSince(req.query.token, req.params.username, 'gaussianblurs/TWEB-Project01', '2018-10-1')
   client.lastThreeWeeksUserCommits(req.query.token, req.params.username)
     .then(result => res.send(result))
     .catch(next)

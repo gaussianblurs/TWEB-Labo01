@@ -58,8 +58,7 @@ class Github {
           const linkHeader = res.headers.get('link')
           if (linkHeader) {
             const headersArr = [].concat(...linkHeader.split(',').map(el => el.split(';'))).map(el => el.trim())
-            const nextUrl = headersArr[headersArr.findIndex(el => el === 'rel="next"') - 1]
-            if (nextUrl) {
+            if (headersArr.findIndex(el => el === 'rel="next"')) {
               return this.repoUserCommitsSince(token, username, repoName, stringDate, acc, page + 1)
             }
           }
@@ -78,7 +77,7 @@ class Github {
 
   lastThreeWeeksUserCommits(token, username) {
     const d = new Date()
-    d.setDate(d.getDate() - 21)
+    d.setDate(d.getDate() - 365)
     return this.repos(token, username, 'all')
       .then(res => res.json())
       .then((repos) => {
