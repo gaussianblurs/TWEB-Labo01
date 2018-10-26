@@ -2,16 +2,14 @@
   <div>
     <b-navbar type="dark" variant="info">
       <a><img class="nav-logo" src="../assets/nav-logo.svg"></a>
-      <b-nav-form>
-        <b-form-group>
+      <b-nav-form v-on:submit.prevent="">
           <b-form-input
             class="mr-sm-2"
             id="input"
             placeholder="username"
-            @submit.prevent
+            @keydown.native="routeToStats"
             v-model.trim="fieldUsername"
           />
-        </b-form-group>
       </b-nav-form>
     </b-navbar>
     <b-container>
@@ -31,9 +29,11 @@ export default {
   },
   methods: {
     routeToStats(event) {
-      event.preventDefault()
+      console.log('boo ')
+      console.log(event.which)
       if (event.which === 13 && this.fieldUsername) {
-        this.$router.push({ name: 'stats', params: { username: this.fieldUsername }})
+        console.log('IN')
+        this.currentUsername = this.fieldUsername
       }
     },
   },
@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       fieldUsername: '',
+      currentUsername: this.username,
     }
   }
 }

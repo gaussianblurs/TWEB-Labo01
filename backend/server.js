@@ -23,6 +23,7 @@ app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-
     client_id: process.env.CLIENT_ID,
     client_secret: process.env.CLIENT_SECRET,
     code: req.query.code,
+    scope: 'user,repo',
   }
 
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))

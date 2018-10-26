@@ -33,15 +33,20 @@ export default {
       }
     },
     fetchToken() {
-      return axios.get(`/authenticate/?code=${this.code}`)
-      .then((response) => {
-        if(response.data.access_token) {
-          window.localStorage.setItem('access_token', response.data.access_token)
-        } else {
-          this.$router.push({ name: 'homepage' })
-        }
-      })
-      .catch(error => console.error(error))
+      let token = window.localStorage.getItem('access_token')
+      if(!token) {
+        axios.get(`/authenticate/?code=${this.code}`)
+        .then((response) => {
+          let token = window.localStorage.getItem('access_token');
+          if(!token)
+          if(response.data.access_token) {
+            window.localStorage.setItem('access_token', response.data.access_token)
+          } else {
+            this.$router.push({ name: 'homepage' })
+          }
+        })
+        .catch(error => console.error(error))
+      }
     }
   },
   mounted () {
