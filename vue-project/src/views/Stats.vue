@@ -16,11 +16,7 @@
     </b-navbar>
     <b-container>
       <div class="chart-container">
-<<<<<<< HEAD
         <weekly-commits-line-chart-card class="my-4" title="Overview" :username="username"></weekly-commits-line-chart-card>
-=======
-        <weekly-commits-line-chart-card class="my-4" title="Overview" username="gaussianblurs"></weekly-commits-line-chart-card>
->>>>>>> df0e5376171238df7223c5e52b1054a9571c5f6e
       </div>
     </b-container>
   </div>

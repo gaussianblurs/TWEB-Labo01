@@ -78,7 +78,7 @@ class Github {
 
   lastThreeWeeksUserCommits(token, username) {
     const d = new Date()
-    d.setDate(d.getDate() - 21)
+    d.setDate(d.getDate() - 365)
     return this.repos(token, username, 'all')
       .then(res => res.json())
       .then((repos) => {
