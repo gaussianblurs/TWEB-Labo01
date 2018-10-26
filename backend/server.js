@@ -58,6 +58,13 @@ app.get('/weekly_commits/:username', (req, res, next) => {
     .catch(next)
 })
 
+app.get('/test/:username', (req, res, next) => {
+  // client.repoUserCommitsSince(req.query.token, req.params.username, 'gaussianblurs/TWEB-Project01', '2018-10-1')
+  client.lastThreeWeeksUserCommits(req.query.token, req.params.username)
+    .then(result => res.send(result))
+    .catch(next)
+})
+
 // Forward 404 to error handler
 app.use((req, res, next) => {
   const error = new Error('Not found')
