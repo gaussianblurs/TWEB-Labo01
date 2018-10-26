@@ -14,7 +14,7 @@
     </b-navbar>
     <b-container>
       <div class="chart-container">
-        <weekly-commits-line-chart-card class="my-4" title="Overview" :username="username"></weekly-commits-line-chart-card>
+        <weekly-commits-line-chart-card class="my-4" title="Overview" :username="currentUsername" />
       </div>
     </b-container>
   </div>
@@ -29,16 +29,10 @@ export default {
   },
   methods: {
     routeToStats(event) {
-      console.log('boo ')
-      console.log(event.which)
       if (event.which === 13 && this.fieldUsername) {
-        console.log('IN')
         this.currentUsername = this.fieldUsername
       }
     },
-  },
-  mounted() {
-    console.log(this.username)
   },
   data() {
     return {

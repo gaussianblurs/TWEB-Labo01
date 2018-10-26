@@ -71,7 +71,7 @@ class Github {
   }
 
   userLanguages(token, username) {
-    return this.repos(token, username, 'all')
+    return this.reposUser(token, username, 'all')
       .then(res => res.json())
       .then((repos) => {
         const getLanguages = repo => this.repoLanguages(token, repo.full_name)
@@ -87,7 +87,7 @@ class Github {
       .then((repos) => {
         const getCommits = async repo => ({
           repoName: repo.full_name,
-          commits: await this.reposUser(token)
+          commits: await this.repoUserCommitsSince(token, username, repo.full_name, d.toISOString())
             .catch(err => []), // eslint-disable-line no-unused-vars
         })
         return Promise.all(repos.map(getCommits))

@@ -11,6 +11,13 @@ export default {
     LineChart
   },
   props: ['title', 'username'],
+  watch: {
+    // whenever question changes, this function will run
+    username: function () {
+      this.fetchData()
+      .then(() => this.fillData())
+    }
+  },
   data () {
     return {
       rawData: null,
