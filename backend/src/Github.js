@@ -52,7 +52,7 @@ class Github {
   }
 
   repoUserCommitsSince(token, username, repoName, stringDate) {
-    return this.request(token, `/repos/${repoName}/commits?since=${stringDate}&author=${username}`)
+    return this.request(token, `/repos/${repoName}/commits?since=${stringDate}&author=${username}&type=all`)
   }
 
   userLanguages(token, username) {
