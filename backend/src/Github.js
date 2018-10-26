@@ -58,8 +58,7 @@ class Github {
           const linkHeader = res.headers.get('link')
           if (linkHeader) {
             const headersArr = [].concat(...linkHeader.split(',').map(el => el.split(';'))).map(el => el.trim())
-            const nextUrl = headersArr[headersArr.findIndex(el => el === 'rel="next"') - 1]
-            if (nextUrl) {
+            if (headersArr.findIndex(el => el === 'rel="next"') !== -1) {
               return this.repoUserCommitsSince(token, username, repoName, stringDate, acc, page + 1)
             }
           }
