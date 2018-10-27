@@ -20,7 +20,7 @@ class Github {
       ...opts,
       headers: {
         Accept: 'application/vnd.github.v3+json',
-        Authorization: `bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         ...opts.headers,
       },
     }

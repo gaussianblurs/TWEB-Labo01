@@ -4,9 +4,11 @@
       <a class="mx-auto"><img class="nav-logo" src="../assets/nav-logo.svg"></a>
     </b-navbar>
     <b-container>
-      <div class="chart-container">
+      <b-row>
+      <div class="chart-container d-inline">
         <weekly-commits-line-chart-card class="my-4" title="Overview" :username="currentUsername" />
       </div>
+    </b-row>
     </b-container>
   </div>
 </template>

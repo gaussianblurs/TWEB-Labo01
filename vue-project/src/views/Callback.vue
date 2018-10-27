@@ -39,8 +39,8 @@ export default {
       return axios.get(`/user?token=${token}`)
       .then((response) => {
         console.log(response)
-        if(response.data.username) {
-          this.$router.push({ name: 'stats', params: { username: this.username }})
+        if(response.data.login) {
+          this.$router.push({ name: 'stats', params: { username: this.login }})
         } else {
           this.$router.push({ name: 'homepage' })
         }
