@@ -6,7 +6,7 @@
     <b-container>
       <b-row class="title" align-h="between">
         <b-col cols="auto" class="mr-auto">
-          <b-img rounded="circle" width="75" height="75" alt="img" class="m-2 d-inline" :src="avatar" />
+          <b-img rounded="circle" width="75" height="75" alt="img" class="my-3 mr-3 d-inline" :src="avatar" />
           <h1 class="d-inline">{{ username }}</h1>
         </b-col>
         <b-col cols="auto">
@@ -14,7 +14,7 @@
             <h2>{{ public_repos }} PUBLIC REPOS</h2>
             <h2>{{ private_repos }} PRIVATE REPOS</h2>
           </div>
-          <div class="user-infos d-inline-block ml-4 mr-2">
+          <div class="user-infos d-inline-block ml-4">
             <h2>{{ followers }} FOLLOWERS</h2>
             <h2>{{ collaborators }} COLLABORATORS</h2>
           </div>

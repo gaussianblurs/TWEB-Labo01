@@ -77,10 +77,10 @@ export default {
         },
         layout: {
           padding: {
-            left: 30,
-            right: 30,
-            top: 10,
-            bottom: 20
+            left: 0,
+            right: 20,
+            top: 5,
+            bottom: 20,
           }
         },
         scales: {
