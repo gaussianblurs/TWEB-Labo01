@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const GoogleFontsPlugin = require("google-fonts-webpack-plugin")
 
 module.exports = {
   entry: './src/main.js',
@@ -59,7 +60,14 @@ module.exports = {
   performance: {
     hints: false
   },
-  plugins: [new ExtractTextPlugin("main.css")],
+  plugins: [
+    new ExtractTextPlugin("main.css"),
+    new GoogleFontsPlugin({
+      fonts: [
+          { family: "Roboto", variants: [ "300", "400", "500", "700" ] }
+      ]
+    })
+  ],
   devtool: '#eval-source-map'
 }
 

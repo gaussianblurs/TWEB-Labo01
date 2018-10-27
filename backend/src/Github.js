@@ -25,15 +25,11 @@ class Github {
       },
     }
 
-    console.log(`URL: ${url}`) // eslint-disable-line no-console
-    console.log(`OPTS: ${options.headers.Authorization}`) // eslint-disable-line no-console
-
     return fetch(url, options)
       .then((res) => {
         if (!res.ok) {
           throw new ResponseError(res, res.json())
         }
-        console.log(res) // eslint-disable-line no-console
         return res
       })
   }
@@ -45,18 +41,22 @@ class Github {
 
   users(token, username) {
     return this.request(token, `/users/${username}`)
+      .then(res => res.json())
   }
 
   reposUser(token) {
     return this.request(token, '/user/repos')
+      .then(res => res.json())
   }
 
   repoLanguages(token, repoName) {
     return this.request(token, `/repos/${repoName}/languages`)
+      .then(res => res.json())
   }
 
   repoUserCommits(token, username, repoName) {
     return this.request(token, `/repos/${repoName}/commits`)
+      .then(res => res.json())
   }
 
   repoUserCommitsSince(token, username, repoName, stringDate, acc = [], page = 1) {
@@ -77,7 +77,6 @@ class Github {
 
   userLanguages(token) {
     return this.reposUser(token)
-      .then(res => res.json())
       .then((repos) => {
         const getLanguages = repo => this.repoLanguages(token, repo.full_name)
         return Promise.all(repos.map(getLanguages))
@@ -88,7 +87,6 @@ class Github {
     const d = new Date()
     d.setDate(d.getDate() - 21)
     return this.reposUser(token)
-      .then(res => res.json())
       .then((repos) => {
         const getCommits = async repo => ({
           repoName: repo.full_name,

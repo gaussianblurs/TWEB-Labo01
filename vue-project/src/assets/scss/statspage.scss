@@ -8,12 +8,47 @@
   }
 }
 
+.title {
+  color: #20313F;
+  margin-top: 10px;
+  background-color: $light;
+  color: $dark;
+  font-family: 'Roboto', sans-serif;
+
+  img {
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #2ecc71;
+  }
+
+  h1 {
+    vertical-align: sub;
+    font-weight: 300;
+    font-size: 2em;
+    padding: 0;
+  }
+
+  h2 {
+    vertical-align: sub;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 0;
+  }
+
+  .user-infos {
+    padding-top: 22px;
+    height: 100%;
+  }
+}
+
 .nav-logo {
   height: 50px;
 }
 
 .chart-container {
-  margin: 10px;
+  margin-top: 10px;
+  min-height: 100px;
   padding: 0;
   background-color: $light;
 }

@@ -1,5 +1,7 @@
 <template>
-  <line-chart :chart-data="dataCollection" :options="options"></line-chart>
+  <div v-if="!loading">
+    <line-chart :chart-data="dataCollection" :options="options"></line-chart>
+  </div>
 </template>
 
 <script>
@@ -11,23 +13,21 @@ export default {
     LineChart
   },
   props: ['title', 'username'],
-  watch: {
-    // whenever question changes, this function will run
-    username: function () {
-      this.fetchData()
-      .then(() => this.fillData())
-    }
-  },
-  data () {
+  data() {
     return {
-      rawData: null,
-      dataCollection: null,
-      options: null
+      rawData: [],
+      dataCollection: {
+        datasets: []
+      },
+      options: {},
+      colors: ['#2ecc71','#1abc9c', '#3498db', '#9b59b6', '#f1c40f', '#e67e22', '#e74c3c', '#34495e'],
+      loading: true
     }
   },
-  mounted () {
+  mounted() {
     this.fetchData()
     .then(() => this.fillData())
+    .then(() => this.loading=false)
   },
   methods: {
     fetchData () {
@@ -38,34 +38,38 @@ export default {
       })
       .catch(error => console.error(error))
     },
-    fillData () {
-      this.dataCollection = {
-        datasets: [],
-      }
+    fillData() {
+      let colorIndex = 0
       this.rawData.forEach((repo, index) => {
-        const dataset = this.dataCollection.datasets[index]
-        dataset.push({
-          label: repo.name,
-          backgroundColor: 'transparent',
-          borderColor: '#27ae60',
-          pointBackgroundColor: '#27ae60',
-          // pointBorderColor: '#27ae60',
-          //pointBorderWidth: 3,
-          data: []
-        })
-        repo.commits.forEach(commit => {
-          dataset.data.push({
-            t: Object.keys(commit)[0],
-            y: Object.values(commit)[0],
+        if(repo.commits.length > 0) {
+          let data = []
+          repo.commits.forEach(commit => {
+            //this.dataCollection.labels.push(Object.keys(commit)[0])
+            data.push({
+              t: Object.keys(commit)[0],
+              y: Object.values(commit)[0],
+            })
           })
-        })
+          this.dataCollection.datasets.push({
+            label: repo.name,
+            fill: false,
+            backgroundColor: 'transparent',
+            borderColor: this.colors[colorIndex],
+            pointBackgroundColor: this.colors[colorIndex],
+            data: data
+          })
+          colorIndex++
+        }
       })
       this.options = {
         maintainAspectRatio: false,
         title: {
           display: true,
           fontSize: 30,
-          text: '3 Weeks Commits'
+          fontFamily: 'Roboto',
+          fontStyle: '300',
+          fontColor: '#20313F',
+          text: this.title
         },
         legend: {
           labels: {
@@ -83,7 +87,7 @@ export default {
           xAxes: [{
             type: 'time',
             time: {
-              unit: 'week'
+              unit: 'day'
             },
             gridLines: {
             },
