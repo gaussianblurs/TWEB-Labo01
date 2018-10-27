@@ -40,22 +40,24 @@ export default {
     },
     fillData () {
       this.dataCollection = {
-        datasets: [
-          {
-            label: "Commits",
-            backgroundColor: 'transparent',
-            borderColor: '#27ae60',
-            pointBackgroundColor: '#27ae60',
-            // pointBorderColor: '#27ae60',
-            //pointBorderWidth: 3,
-            data: []
-          }
-        ],
+        datasets: [],
       }
-      this.rawData.forEach(commit => {
-        this.dataCollection.datasets[0].data.push({
-          t: Object.keys(commit)[0],
-          y: Object.values(commit)[0],
+      this.rawData.forEach((repo, index) => {
+        const dataset = this.dataCollection.datasets[index]
+        dataset.push({
+          label: repo.name,
+          backgroundColor: 'transparent',
+          borderColor: '#27ae60',
+          pointBackgroundColor: '#27ae60',
+          // pointBorderColor: '#27ae60',
+          //pointBorderWidth: 3,
+          data: []
+        })
+        repo.commits.forEach(commit => {
+          dataset.data.push({
+            t: Object.keys(commit)[0],
+            y: Object.values(commit)[0],
+          })
         })
       })
       this.options = {

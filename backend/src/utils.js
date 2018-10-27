@@ -14,19 +14,28 @@ function getReposLanguagesStats(reposLanguages = []) {
 }
 
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
-  const stats = {}
+  const stats = []
   const countCommits = o => {
+    stats.push({
+      name: o.repoName,
+      commits: {},
+    })
     o.commits.forEach(commit => {
       let { date } = commit.commit.author
       date = date.substring(0, date.indexOf('T'))
-      const current = stats[date] || 0
-      stats[date] = current + 1
+      const current = stats[stats.length - 1].commits[date] || 0
+      stats[stats.length - 1].commits[date] = current + 1
     })
   }
   reposWeeklyCommits.forEach(countCommits)
-  return Object.keys(stats)
-    .sort((a, b) => new Date(a) - new Date(b))
-    .map(key => ({ [key]: stats[key] }))
+  return stats.map(el => (
+    {
+      name: el.name,
+      commits: Object.keys(el.commits)
+        .sort((a, b) => new Date(a) - new Date(b))
+        .map(key => ({ [key]: el.commits[key] })),
+    }
+  ))
 }
 
 module.exports = {
