@@ -40,6 +40,7 @@ class Github {
 
   user(token) {
     return this.request(token, '/user')
+      .then(res => res.json())
   }
 
   users(token, username) {

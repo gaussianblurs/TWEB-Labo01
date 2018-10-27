@@ -31,19 +31,19 @@ app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-
     .then(body => res.send(body))
 })
 
-app.get('/user', (req, res, next) => { // eslint-disable-line no-unused-vars
+app.get('/user', (req, res, next) => {
   client.user(req.query.token)
     .then(user => res.send(user))
     .catch(next)
 })
 
-app.get('/repos', (req, res, next) => { // eslint-disable-line no-unused-vars
+app.get('/repos', (req, res, next) => {
   client.reposUser(req.query.token)
     .then(repos => res.send(repos))
     .catch(next)
 })
 
-app.get('/users/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
+app.get('/users/:username', (req, res, next) => {
   client.users(req.query.token, req.params.username)
     .then(user => res.send(user))
     .catch(next)
