@@ -2,19 +2,19 @@
   <div>
     <div class="form-container">
       <b-form-group
-        description="Enter a GitHub username to get sweet stats."
-        label="GitHub username"
-        label-for="input"
-        :invalid-feedback="invalidFeedback"
-        :valid-feedback="validFeedback"
-        :state="null"
+      description="Enter a GitHub username to get sweet stats."
+      label="GitHub username"
+      label-for="input"
+      :invalid-feedback="invalidFeedback"
+      :valid-feedback="validFeedback"
+      :state="null"
       >
         <b-form-input
-          id="input"
-          placeholder=""
-          :state="state"
-          @keydown.native="routeToStats"
-          v-model.trim="fieldUsername"
+        id="input"
+        placeholder=""
+        :state="state"
+        @keydown.native="routeToStats"
+        v-model.trim="fieldUsername"
         />
     </b-form-group>
   </div>

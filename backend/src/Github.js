@@ -20,21 +20,29 @@ class Github {
       ...opts,
       headers: {
         Accept: 'application/vnd.github.v3+json',
-        Authorization: `token ${token}`,
+        Authorization: `bearer ${token}`,
         ...opts.headers,
       },
     }
+
+    console.log(`URL: ${url}`) // eslint-disable-line no-console
+    console.log(`OPTS: ${options.headers.Authorization}`) // eslint-disable-line no-console
 
     return fetch(url, options)
       .then((res) => {
         if (!res.ok) {
           throw new ResponseError(res, res.json())
         }
+        console.log(res) // eslint-disable-line no-console
         return res
       })
   }
 
-  user(token, username) {
+  user(token) {
+    return this.request(token, '/user')
+  }
+
+  users(token, username) {
     return this.request(token, `/users/${username}`)
   }
 

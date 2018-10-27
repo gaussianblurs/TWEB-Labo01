@@ -23,7 +23,6 @@ app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-
     client_id: process.env.CLIENT_ID,
     client_secret: process.env.CLIENT_SECRET,
     code: req.query.code,
-    scope: 'user,repo',
   }
 
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
@@ -32,8 +31,20 @@ app.get('/authenticate', (req, res, next) => { // eslint-disable-line no-unused-
     .then(body => res.send(body))
 })
 
+app.get('/user', (req, res, next) => { // eslint-disable-line no-unused-vars
+  client.user(req.query.token)
+    .then(user => res.send(user))
+    .catch(next)
+})
+
+app.get('/repos', (req, res, next) => { // eslint-disable-line no-unused-vars
+  client.reposUser(req.query.token)
+    .then(repos => res.send(repos))
+    .catch(next)
+})
+
 app.get('/users/:username', (req, res, next) => { // eslint-disable-line no-unused-vars
-  client.user(req.query.token, req.params.username)
+  client.users(req.query.token, req.params.username)
     .then(user => res.send(user))
     .catch(next)
 })

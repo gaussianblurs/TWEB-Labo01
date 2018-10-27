@@ -1,13 +1,16 @@
 <template>
   <div>
     <div class="text-center">
-      <b-button class="login-button" variant="outline-dark" href="https://github.com/login/oauth/authorize?scope=user:email&client_id=404158819bf74ed09ba6">
+      <b-button
+      class="login-button"
+      variant="outline-dark" 
+      href="https://github.com/login/oauth/authorize?scope=user%20repo&client_id=404158819bf74ed09ba6">
         <span class="logo-github">
           <font-awesome-icon :icon="['fab', 'github']" />
         </span>
         <span class="text-login">Login with GitHub</span>
       </b-button>
-      <p>Authenticate to get sweet stats about GitHub users.</p>
+      <p>Authenticate to get sweet GitHub stats.</p>
     </div>
   </div>
 </template>
