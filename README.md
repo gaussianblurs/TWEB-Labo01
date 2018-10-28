@@ -55,3 +55,6 @@ npm run lint
 npm run test
 
 ```
+
+## Known bugs
+> Occasionally, when loading stats by selecting a repository from the dropdown menu, the server will raise a 500 error. The origin of this bug is unkown and seems to occur only through the app, and is probably linked to the _ContributorsListCard_ component.
