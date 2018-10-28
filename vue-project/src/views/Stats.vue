@@ -48,7 +48,7 @@
       </b-row>
       <b-row class="repo-charts-container mt-2">
         <b-col class="chart-container mr-1">
-          <contributors-list-card title="COLLABORATORS" :reponame="this.selectedRepo" />
+          <contributors-list-card title="COLLABORATORS" :reponame="selectedRepo" />
         </b-col>
       </b-row>
       <b-row class="repo-charts-container mt-2">
