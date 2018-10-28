@@ -14,7 +14,7 @@ function getReposLanguagesStats(reposLanguages = []) {
 }
 
 function mostPopularsLanguages(languages = []) {
-  return languages.slice(languages.length - 7, languages.length)
+  return languages.slice(languages.length - 6, languages.length)
 }
 
 function arrayUnique(array) {
@@ -38,7 +38,6 @@ function formatWeeklyCommitsStats(weeklyCommitsStats = []) {
   })
   let datesArray = []
   commitsStats.forEach((repo) => {
-    console.log(repo) // eslint-disable-line
     Object.entries(repo.commits).forEach((commit) => {
       datesArray.push(new Date(commit[0]))
     })
@@ -96,8 +95,28 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
   ))
 }
 
+function getReposCommitsStats(reposCommits = []) {
+  const stats = []
+  const countCommits = o => {
+    if (o.commits.length > 0) {
+      stats.push({
+        name: o.repoName,
+        commits: o.commits.length,
+      })
+    }
+  }
+  reposCommits.forEach(countCommits)
+  return stats.sort((a, b) => a.commits - b.commits)
+}
+
+function mostPopularRepos(repos = []) {
+  return repos.slice(repos.length - 6, repos.length)
+}
+
 module.exports = {
   getReposLanguagesStats,
   getWeeklyCommitsStats,
   mostPopularsLanguages,
+  getReposCommitsStats,
+  mostPopularRepos,
 }

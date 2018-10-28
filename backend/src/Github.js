@@ -65,10 +65,6 @@ class Github {
     return this.request(token, '/user')
   }
 
-  users(token, username) {
-    return this.request(token, `/users/${username}`)
-  }
-
   reposUser(token) {
     return this.request(token, '/user/repos')
   }
@@ -77,12 +73,24 @@ class Github {
     return this.request(token, `/repos/${repoName}/languages`)
   }
 
-  repoUserCommits(token, username, repoName) {
-    return this.request(token, `/repos/${repoName}/commits`)
+  repoUserCommits(token, username, repoName, page = 1, perPage = 100) {
+    return this.request(token, `/repos/${repoName}/commits?page=${page}&per_page=${perPage}&author=${username}`)
   }
 
-  repoUserCommitsSince(token, username, repoName, stringDate) {
-    return this.request(token, `/repos/${repoName}/commits?page=1&per_page=100&since=${stringDate}&author=${username}`)
+  userCommits(token, username) {
+    return this.reposUser(token)
+      .then(repos => {
+        const getCommits = async repo => ({
+          repoName: repo.full_name,
+          commits: await this.repoUserCommits(token, username, repo.full_name)
+            .catch(err => []), // eslint-disable-line no-unused-vars
+        })
+        return Promise.all(repos.map(getCommits))
+      })
+  }
+
+  repoUserCommitsSince(token, username, repoName, stringDate, page = 1, perPage = 100) {
+    return this.request(token, `/repos/${repoName}/commits?page=${page}&per_page=${perPage}&since=${stringDate}&author=${username}`)
   }
 
   userLanguages(token) {

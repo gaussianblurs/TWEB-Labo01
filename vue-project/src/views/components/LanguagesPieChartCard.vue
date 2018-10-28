@@ -22,6 +22,7 @@ export default {
         labels: [],
         datasets: [{
           data: [],
+          borderColor: [],
           backgroundColor: [],
         }]
       },
@@ -47,7 +48,8 @@ export default {
       this.rawData.forEach((language, index) => {
         this.dataCollection.labels.push(Object.keys(language)[0])
         this.dataCollection.datasets[0].data.push(Object.values(language)[0])
-        this.dataCollection.datasets[0].backgroundColor.push(this.colors[index].color)
+        this.dataCollection.datasets[0].borderColor.push(this.colors[index].color)
+        this.dataCollection.datasets[0].backgroundColor.push(this.colors[index].backgroundColor)
       }),
       this.options = {
         maintainAspectRatio: true,
