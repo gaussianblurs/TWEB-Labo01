@@ -2,6 +2,9 @@
   <div v-if="!loading">
     <pie-chart :chart-data="dataCollection" :options="options"></pie-chart>
   </div>
+  <div v-else>
+    <h1>LOADING</h1>
+  </div>
 </template>
 
 <script>
