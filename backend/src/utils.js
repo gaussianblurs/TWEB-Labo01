@@ -14,7 +14,6 @@ function getReposLanguagesStats(reposLanguages = []) {
 }
 
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
-  return reposWeeklyCommits
   const stats = []
   const countCommits = o => {
     if (o.commits.length > 0) {
