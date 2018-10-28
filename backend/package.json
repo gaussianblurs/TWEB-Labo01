@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "build": "npm install --only=prod",
     "dev": "nodemon --watch server.js --watch src",
     "test": "mocha",
     "lint": "eslint server.js src/**/*.js"

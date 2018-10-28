@@ -95,6 +95,34 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
   ))
 }
 
+function formatRepoCommitsStats(repoCommitsStats = {}) {
+  const repoCommits = repoCommitsStats
+  let datesArray = []
+  Object.entries(repoCommits).forEach((commits) => {
+    datesArray.push(new Date(commits[0]))
+  })
+  datesArray = arrayUnique(datesArray)
+  const maxDate = new Date(Math.max.apply(null, datesArray))
+  const minDate = new Date(Math.min.apply(null, datesArray))
+
+  for (let d = (new Date(minDate)); d <= maxDate; d.setDate(d.getDate() + 1)) {
+    let date = d.toISOString()
+    date = date.substring(0, date.indexOf('T'))
+    let alreadyIn = false
+
+    Object.entries(repoCommits).forEach((commits) => {
+      if (date === commits[0]) {
+        alreadyIn = true
+      }
+    })
+
+    if (!alreadyIn) {
+      repoCommits[date] = 0
+    }
+  }
+  return repoCommits
+}
+
 function getReposCommitsStats(reposCommits = []) {
   const stats = []
   const countCommits = o => {
@@ -121,7 +149,8 @@ function getRepoCommitsStats(repoCommits = []) {
     stats[date] = current + 1
   }
   repoCommits.forEach(countCommits)
-  return Object.keys(stats)
+  const commitsStats = formatRepoCommitsStats(stats)
+  return Object.keys(commitsStats)
     .sort((a, b) => new Date(a) - new Date(b))
     .map(key => ({ [key]: stats[key] }))
 }
