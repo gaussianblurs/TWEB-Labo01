@@ -45,6 +45,8 @@
 }
 
 .chart-container {
+  font-family: 'Roboto', sans-serif;
+  color: $dark;
   min-height: 100px;
   padding: 0;
   background-color: $light;
@@ -70,7 +72,31 @@
   }
 }
 
-.repo-charts-container {
-  font-family: 'Roboto', sans-serif;
-  color: $dark;
+.footer {
+  padding-top: 20px;
+
+  h2 {
+    vertical-align: middle;
+    padding: 0;
+    font-size: 1.5em;
+    font-weight: 400;
+
+    a {
+      color: $dark;
+      text-decoration: none;
+    }
+  }
+
+  .made-by {
+    vertical-align: middle;
+    padding: 0;
+    font-size: 1.2em;
+    font-weight: 300;
+  }
+
+  .heart-icon {
+    vertical-align: middle;
+    font-size: 1.2em;
+    color: #e74c3c;
+  }
 }

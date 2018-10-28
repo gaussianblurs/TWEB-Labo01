@@ -1,9 +1,13 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 
+const baseUrl =  window.location.hostname === 'localhost'
+  ? 'http://localhost:3000'
+  : 'https://technography.herokuapp.com/';
+
 // create a new axios instance
 const instance = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: baseUrl
 })
 
 // before a request is made start the nprogress

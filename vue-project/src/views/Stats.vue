@@ -41,22 +41,25 @@
           </b-form-select>
         </b-col>
       </b-row>
-      <b-row class="repo-charts-container mt-2">
-        <b-col class="chart-container mr-1">
+      <b-row class="chart-container mt-2">
+        <b-col class="mr-1">
           <commits-line-chart-card title="COMMITS" :username="username" :reponame="selectedRepo" />
         </b-col>
       </b-row>
-      <b-row class="repo-charts-container mt-2">
-        <b-col class="chart-container mr-1">
-          <contributors-list-card title="COLLABORATORS" :reponame="this.selectedRepo" />
+      <b-row class="chart-container mt-2">
+        <b-col class="mr-1">
+          <!-- <contributors-list-card title="COLLABORATORS" :reponame="selectedRepo" /> -->
         </b-col>
       </b-row>
-      <b-row class="repo-charts-container mt-2">
-        <b-col class="chart-container mr-2">
-        </b-col>
-        <b-col class="chart-container">
-        </b-col>
-        <b-col class="chart-container ml-2">
+      <b-row class="chart-container mt-2 mb-2">
+        <b-col class="footer text-center">
+          <h3 class="made-by d-inline">MADE WITH </h3>
+          <font-awesome-icon class="heart-icon d-inline" icon="heart" />
+          <h3 class="made-by d-inline"> BY</h3>
+          <h2>
+            <a href="https://github.com/psrochat">psrochat</a> &
+            <a href="https://github.com/gaussianblurs">gaussianblurs</a>
+          </h2>
         </b-col>
       </b-row>
     </b-container>
