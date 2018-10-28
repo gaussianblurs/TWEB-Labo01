@@ -42,7 +42,10 @@ npm install
 #install for production (without dev dependencies)
 npm run build
 
-#start server
+# serve with hot reload at localhost:3000
+npm run dev
+
+#serve for production
 npm start
 
 #lint code (reuiqres dev dependencies)
@@ -50,8 +53,5 @@ npm run lint
 
 #test server
 npm run test
-
-# serve with hot reload at localhost:3000
-npm run dev
 
 ```
