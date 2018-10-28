@@ -43,7 +43,7 @@
       </b-row>
       <b-row class="repo-charts-container mt-2">
         <b-col class="chart-container mr-1">
-          <commits-line-chart-card title="COMMITS" :username="username" :reponame="this.selectedRepo" />
+          <commits-line-chart-card title="COMMITS" :username="username" :reponame="selectedRepo" />
         </b-col>
       </b-row>
       <b-row class="repo-charts-container mt-2">

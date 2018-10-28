@@ -72,10 +72,6 @@ export default {
           fontColor: '#20313F',
           text: this.title
         },
-        legend: {
-          labels: {
-          }
-        },
         scales: {
           xAxes: [{
             type: 'time',
