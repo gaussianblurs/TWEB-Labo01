@@ -10,19 +10,48 @@ The app was designed with simplicity in mind, bringing powerful information to t
 all this, the key term of TechnoGraphy is "elegance".  
 
 The app is fully responsive, and powered by [Vue.js](https://vuejs.org/)   
-The graphs were generated with [Chart.js]([Chart.js](https://www.chartjs.org/)
+The graphs were generated with [Chart.js]((https://www.chartjs.org/)
+
+The current build is hosted on [Zeit Now](https://zeit.co/now) and the backend on [Heroku](https://www.heroku.com/), and is accessible [here](https://technography-cimyyttbvv.now.sh/)
 
 TechnoGraphy was made with ❤ by [psrochat](https://github.com/psrochat) & [gaussianblurs](https://github.com/gaussianblurs)
 
 ## Build Setup
 
+### Frontend
 ``` bash
+cd vue-project
+
 # install dependencies
 npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
+# build for production with minification (files will go to the site subfolder of the root directory)
 npm run build
+```
+
+### Backend
+``` bash
+cd backend
+
+# install with dev dependencies
+npm install
+
+#install for production (without dev dependencies)
+npm run build
+
+#start server
+npm start
+
+#lint code (reuiqres dev dependencies)
+npm run lint
+
+#test server
+npm run test
+
+# serve with hot reload at localhost:3000
+npm run dev
+
 ```
