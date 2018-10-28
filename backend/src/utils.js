@@ -173,7 +173,8 @@ function getContributorsStats(contributors = []) {
   return contributors
     .map(el => ({
       username: el.author.login,
-      link: el.author.html_url,
+      url: el.author.html_url,
+      avatarUrl: el.author.avatar_url,
       totalCommits: el.total,
     }))
 }
