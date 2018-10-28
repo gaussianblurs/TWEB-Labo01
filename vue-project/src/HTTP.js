@@ -1,9 +1,9 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 
-const baseUrl =  window.location.hostname === 'localhost'
-  ? 'http://localhost:3000'
-  : 'https://technography.herokuapp.com/';
+const baseUrl =  process.env.NODE_ENV === 'production'
+  ? 'https://technography.herokuapp.com/'
+  : 'http://localhost:3000'
 
 // create a new axios instance
 const instance = axios.create({
