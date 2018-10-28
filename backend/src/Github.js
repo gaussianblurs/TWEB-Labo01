@@ -54,7 +54,10 @@ class Github {
           if (nextPage) {
             return this.request(token, nextPage, options)
           }
-          return [].concat(...acc)
+          if (acc.length > 1) {
+            return [].concat(...acc)
+          }
+          return body
         }))
   }
 
@@ -79,7 +82,7 @@ class Github {
   }
 
   repoUserCommitsSince(token, username, repoName, stringDate) {
-    return this.request(token, `/repos/${repoName}/commits?page=1&per_page=100since=${stringDate}&author=${username}`)
+    return this.request(token, `/repos/${repoName}/commits?since=${stringDate}&author=${username}`)
   }
 
   userLanguages(token) {
