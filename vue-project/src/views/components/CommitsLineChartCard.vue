@@ -45,6 +45,7 @@ export default {
         .catch(error => console.error(error))
     },
     fillData() {
+      this.dataCollection.datasets = []
       this.dataCollection.datasets.push({
         label: this.reponame,
         data: this.rawData.map((el, index) => ({
@@ -77,21 +78,14 @@ export default {
           }]
         }
       }
-    },
-    clearData() {
-      return new Promise()
-        .then(() => {
-          this.dataCollection.datasets = []
-        })
-    },
+    }
   },
   watch: {
     reponame: function() {
       this.loading = true
-      this.clearData()
-      .then(this.fetchData())
-      .then(this.fillData())
-      .then(this.loading = false)
+      this.fetchData()
+      .then(() => this.fillData())
+      .then(() => this.loading=false)
     }
   }
 }
