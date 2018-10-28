@@ -20,8 +20,25 @@ export default {
         datasets: []
       },
       options: {},
-      colors: ['#2ecc71', '#f1c40f', '#3498db', '#9b59b6', '#1abc9c', '#e67e22', '#e74c3c', '#34495e'],
-      loading: true
+      colors: [
+        'rgba(46, 204, 113,1.0)',
+        'rgba(241, 196, 15,1.0)',
+        'rgba(52, 152, 219,1.0)',
+        'rgba(231, 76, 60,1.0)',
+        'rgba(155, 89, 182,1.0)',
+        'rgba(52, 73, 94,1.0)',
+        'rgba(230, 126, 34,1.0)',
+        'rgba(26, 188, 156,1.0)'],
+        backgroundColors: [
+          'rgba(46, 204, 113,0.5)',
+          'rgba(241, 196, 15,0.5)',
+          'rgba(52, 152, 219,0.5)',
+          'rgba(231, 76, 60,0.5)',
+          'rgba(155, 89, 182,0.5)',
+          'rgba(52, 73, 94,0.5)',
+          'rgba(230, 126, 34,0.5)',
+          'rgba(26, 188, 156,0.5)'],
+      loading: true,
     }
   },
   mounted() {
@@ -51,10 +68,10 @@ export default {
           })
           this.dataCollection.datasets.push({
             label: repo.name,
-            fill: false,
-            backgroundColor: 'transparent',
-            borderColor: this.colors[colorIndex % this.colors.length],
-            pointBackgroundColor: this.colors[colorIndex % this.colors.length],
+            fill: true,
+            backgroundColor: this.backgroundColors[colorIndex],
+            borderColor: this.colors[colorIndex],
+            pointBackgroundColor: this.colors[colorIndex],
             data: data
           })
           colorIndex++

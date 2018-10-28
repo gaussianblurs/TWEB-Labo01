@@ -15,26 +15,6 @@ class Github {
     this.baseUrl = baseUrl
   }
 
-  static nextPage(linkHeader) {
-    if (!linkHeader) {
-      return null
-    }
-    console.log('Header!')
-    const headersArr = [].concat(...linkHeader.split(',').map(el => el.split(';'))).map(el => el.trim())
-    const indexOfRelNext = headersArr.findIndex(el => el === 'rel="next"')
-    if (indexOfRelNext === -1) {
-      console.log('No rel=next')
-      return null
-    }
-    let nextUrl = headersArr[indexOfRelNext - 1]
-    console.log(`nextUrl BEFORE: ${nextUrl}`)
-    console.log(`first index: ${this.baseUrl.length + 1}`)
-    console.log(`second index: ${nextUrl.length - 1}`)
-    nextUrl = nextUrl.slice(this.baseUrl.length + 1, nextUrl.length - 1)
-    console.log(`nextUrl AFTER: ${nextUrl}`)
-    return nextUrl
-  }
-
   request(token, path, opts = {}, acc = []) {
     const url = `${this.baseUrl}${path}`
     const options = {
@@ -56,9 +36,8 @@ class Github {
       .then(res => res.json()
         .then(body => {
           acc.push(body)
-          const nextPage = this.constructor.nextPage(res.headers.get('link'))
+          const nextPage = this.nextPage(res.headers.get('link'))
           if (nextPage) {
-            console.log('Recursion')
             return this.request(token, nextPage, options, acc)
           }
           if (acc.length > 1) {
@@ -66,6 +45,20 @@ class Github {
           }
           return body
         }))
+  }
+
+  nextPage(linkHeader) {
+    if (!linkHeader) {
+      return null
+    }
+    const headersArr = [].concat(...linkHeader.split(',').map(el => el.split(';'))).map(el => el.trim())
+    const indexOfRelNext = headersArr.findIndex(el => el === 'rel="next"')
+    if (indexOfRelNext === -1) {
+      return null
+    }
+    let nextUrl = headersArr[indexOfRelNext - 1]
+    nextUrl = nextUrl.slice(this.baseUrl.length + 1, -1)
+    return nextUrl
   }
 
   user(token) {
@@ -89,7 +82,7 @@ class Github {
   }
 
   repoUserCommitsSince(token, username, repoName, stringDate) {
-    return this.request(token, `/repos/${repoName}/commits?page=1&per_page=1&since=${stringDate}&author=${username}`)
+    return this.request(token, `/repos/${repoName}/commits?page=1&per_page=100&since=${stringDate}&author=${username}`)
   }
 
   userLanguages(token) {
