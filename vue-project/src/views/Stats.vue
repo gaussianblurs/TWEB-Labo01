@@ -48,7 +48,7 @@
       </b-row>
       <b-row class="repo-charts-container mt-2">
         <b-col class="chart-container mr-1">
-          <author-list-card title="COLLABORATORS" :reponame="this.selectedRepo" />
+          <contributors-list-card title="COLLABORATORS" :reponame="this.selectedRepo" />
         </b-col>
       </b-row>
       <b-row class="repo-charts-container mt-2">
@@ -69,6 +69,7 @@ import WeeklyCommitsLineChartCard from "./components/WeeklyCommitsLineChartCard"
 import LanguagesPieChartCard from "./components/LanguagesPieChartCard"
 import CommitsBarChartCard from "./components/CommitsBarChartCard"
 import CommitsLineChartCard from "./components/CommitsLineChartCard"
+import ContributorsListCard from "./components/ContributorsListCard"
 
 export default {
   components: {
@@ -76,6 +77,7 @@ export default {
     LanguagesPieChartCard,
     CommitsBarChartCard,
     CommitsLineChartCard,
+    ContributorsListCard,
   },
   data() {
     return {

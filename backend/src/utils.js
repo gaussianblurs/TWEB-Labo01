@@ -172,8 +172,8 @@ function getRepoCommitsStats(repoCommits = []) {
 function getContributorsStats(contributors = []) {
   return contributors
     .map(el => ({
-      author: el.author.login,
-      link: el.author.url,
+      username: el.author.login,
+      link: el.author.html_url,
       totalCommits: el.total,
     }))
 }

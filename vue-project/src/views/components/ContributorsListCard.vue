@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading">
     <ul>
-      <li v-for="author in data">{{ author }}</li>
+      <li v-for="el in data"><a :href="el.link">{{ el.username }}</a></li>
     </ul>
   </div>
   <div v-else class="loading-spinner">
@@ -18,7 +18,7 @@ export default {
   components: {
     ClipLoader
   },
-  props: ['title', 'username', 'reponame'],
+  props: ['title', 'reponame'],
   data() {
     return {
       data: [],
@@ -33,9 +33,9 @@ export default {
   methods: {
     fetchData () {
       let token = window.localStorage.getItem('access_token')
-      return axios.get(`/commits/${this.reponame}?token=${token}`)
+      return axios.get(`/contributors/${this.reponame}?token=${token}`)
         .then((response) => {
-          this.rawData = response.data
+          this.data = response.data
         })
         .catch(error => console.error(error))
     },
@@ -44,7 +44,6 @@ export default {
     reponame: function() {
       this.loading = true
       this.fetchData()
-      .then(() => this.fillData())
       .then(() => this.loading=false)
     }
   }
