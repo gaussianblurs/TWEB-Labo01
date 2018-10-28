@@ -135,7 +135,7 @@ export default {
         this.consoleRepo = this.repos[0]
         this.loading = false
       })
-  },
+  }
 }
 </script>
 

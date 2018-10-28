@@ -1,7 +1,7 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 
-const baseUrl =  process.env.NODE_ENV === 'production'
+const baseUrl = process.env.NODE_ENV === 'production'
   ? 'https://technography.herokuapp.com/'
   : 'http://localhost:3000'
 
