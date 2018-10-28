@@ -1,5 +1,3 @@
-const util = require('util')
-
 function getReposLanguagesStats(reposLanguages = []) {
   const stats = {}
   const countLanguages = o => {
@@ -16,12 +14,15 @@ function getReposLanguagesStats(reposLanguages = []) {
 }
 
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
+  return reposWeeklyCommits
   const stats = []
   const countCommits = o => {
-    stats.push({
-      name: o.repoName,
-      commits: {},
-    })
+    if (o.commits.length > 0) {
+      stats.push({
+        name: o.repoName,
+        commits: {},
+      })
+    }
     o.commits.forEach(commit => {
       let { date } = commit.commit.author
       date = date.substring(0, date.indexOf('T'))

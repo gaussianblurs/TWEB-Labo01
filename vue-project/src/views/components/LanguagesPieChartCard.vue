@@ -13,7 +13,7 @@ export default {
   components: {
     PieChart
   },
-  props: ['title'],
+  props: ['title', 'username'],
   data () {
     return {
       rawData: [],
