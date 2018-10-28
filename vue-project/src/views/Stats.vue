@@ -25,6 +25,11 @@
           <weekly-commits-line-chart-card  title="3 WEEKS COMMITS" :username="username" />
         </b-col>
       </b-row>
+      <b-row class="chart-container" v-if="!loading">
+        <b-col>
+          <languages-pie-chart-card  title="LANGUAGES" :username="username" />
+        </b-col>
+      </b-row>
       <b-row class="repo-select mt-2">
         <b-col>
           <h1 class="mt-2">Select a repo: </h1>
@@ -56,10 +61,12 @@
 <script>
 import axios from '../HTTP'
 import WeeklyCommitsLineChartCard from "./components/WeeklyCommitsLineChartCard"
+import LanguagesPieChartCard from "./components/LanguagesPieChartCard"
 
 export default {
   components: {
-    WeeklyCommitsLineChartCard
+    WeeklyCommitsLineChartCard,
+    LanguagesPieChartCard
   },
   data() {
     return {
