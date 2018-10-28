@@ -115,15 +115,24 @@ function mostPopularRepos(repos = []) {
 
 function getRepoCommitsStats(repoCommits = []) {
   const stats = {}
+  repoCommits.forEach(el => {
+    if (!stats[el.commit.author.name]) {
+      stats[el.commit.author.name] = {}
+    }
+  })
   const countCommits = o => {
     const date = o.commit.author.date.substring(0, o.commit.author.date.indexOf('T'))
-    const current = stats[date] || 0
-    stats[date] = current + 1
+    const current = stats[o.commit.author.name][date] || 0
+    stats[o.commit.author.name][date] = current + 1
   }
   repoCommits.forEach(countCommits)
   return Object.keys(stats)
-    .sort((a, b) => new Date(a) - new Date(b))
-    .map(key => ({ [key]: stats[key] }))
+    .map(author => ({
+      author,
+      commits: Object.keys(stats[author])
+        .sort((a, b) => new Date(a) - new Date(b))
+        .map(key => ({ [key]: stats[author][key] })),
+    }))
 }
 
 module.exports = {
