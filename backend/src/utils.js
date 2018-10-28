@@ -113,10 +113,24 @@ function mostPopularRepos(repos = []) {
   return repos.slice(repos.length - 6, repos.length)
 }
 
+function getRepoCommitsStats(repoCommits = []) {
+  const stats = {}
+  const countCommits = o => {
+    const date = o.commit.author.date.substring(0, o.commit.author.date.indexOf('T'))
+    const current = stats[date] || 0
+    stats[date] = current + 1
+  }
+  repoCommits.forEach(countCommits)
+  return Object.keys(stats)
+    .sort((a, b) => new Date(a) - new Date(b))
+    .map(key => ({ [key]: stats[key] }))
+}
+
 module.exports = {
   getReposLanguagesStats,
   getWeeklyCommitsStats,
   mostPopularsLanguages,
   getReposCommitsStats,
   mostPopularRepos,
+  getRepoCommitsStats,
 }

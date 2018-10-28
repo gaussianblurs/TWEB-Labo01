@@ -16,7 +16,7 @@ export default {
   components: {
     LineChart
   },
-  props: ['title', 'username'],
+  props: ['title', 'username', 'reponame'],
   data() {
     return {
       rawData: [],
@@ -36,30 +36,24 @@ export default {
   methods: {
     fetchData () {
       let token = window.localStorage.getItem('access_token')
-      return axios.get(`/weekly_commits/${this.username}?token=${token}`)
+      return axios.get(`/commits/${this.username}/${this.reponame}?token=${token}`)
         .then((response) => {
           this.rawData = response.data
         })
         .catch(error => console.error(error))
     },
     fillData() {
-      this.rawData.forEach((repo, index) => {
-        let data = []
-        repo.commits.forEach(commit => {
-          data.push({
-            t: Object.keys(commit)[0],
-            y: Object.values(commit)[0],
-          })
-        })
-        this.dataCollection.datasets.push({
-          label: repo.name,
-          fill: true,
-          backgroundColor: this.colors[index].backgroundColor,
-          borderColor: this.colors[index].color,
-          pointBackgroundColor: this.colors[index].color,
-          data: data
-        })
+      this.dataCollection.datasets.push({
+        label: this.reponame,
+        data: this.rawData.map((el, index) => ({
+          t: Object.keys(el)[0],
+          y: Object.values(el)[0],
+        })),
+        borderColor: this.colors[0].color,
+        backgroundColor: this.colors[0].backgroundColor,
       })
+      console.log('data loaded')
+      console.log(this.dataCollection.datasets[0])
       this.options = {
         maintainAspectRatio: false,
         title: {
@@ -69,18 +63,6 @@ export default {
           fontStyle: '300',
           fontColor: '#20313F',
           text: this.title
-        },
-        legend: {
-          labels: {
-          }
-        },
-        layout: {
-          padding: {
-            left: 0,
-            right: 20,
-            top: 5,
-            bottom: 20,
-          }
         },
         scales: {
           xAxes: [{
@@ -92,17 +74,24 @@ export default {
             },
           }]
         }
-      }
+      },
     },
-    arrayUnique(array) {
-      var a = array.concat();
-      for(var i=0; i<a.length; ++i) {
-          for(var j=i+1; j<a.length; ++j) {
-              if(a[i] === a[j])
-                  a.splice(j--, 1);
+    clearData() {
+      return new Promise()
+        .then(() => {
+          this.dataCollection = {
+            datasets: []
           }
-      }
-      return a;
+        })
+    },
+  },
+  watch: {
+    reponame: function() {
+      this.loading = true
+      this.clearData()
+      .then(this.fetchData())
+      .then(this.fillData())
+      .then(this.loading = false)
     }
   }
 }

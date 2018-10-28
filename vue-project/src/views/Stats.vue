@@ -41,9 +41,13 @@
           </b-form-select>
         </b-col>
       </b-row>
-      <b-row v-if="!loading" class="repo-charts-container mt-2">
+      <b-row class="repo-charts-container mt-2">
+        <b-col class="chart-container mr-1">
+          <commits-line-chart-card :title="`COMMITS FOR REPO ${this.selectedRepo}`" :username="username" :reponame="this.selectedRepo" />
+        </b-col>
+      </b-row>
+      <b-row class="repo-charts-container mt-2">
         <b-col class="chart-container mr-2">
-
         </b-col>
         <b-col class="chart-container">
         </b-col>
@@ -59,12 +63,14 @@ import axios from '../HTTP'
 import WeeklyCommitsLineChartCard from "./components/WeeklyCommitsLineChartCard"
 import LanguagesPieChartCard from "./components/LanguagesPieChartCard"
 import CommitsBarChartCard from "./components/CommitsBarChartCard"
+import CommitsLineChartCard from "./components/CommitsLineChartCard"
 
 export default {
   components: {
     WeeklyCommitsLineChartCard,
     LanguagesPieChartCard,
     CommitsBarChartCard,
+    CommitsLineChartCard,
   },
   data() {
     return {
