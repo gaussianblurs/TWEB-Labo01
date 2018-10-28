@@ -74,7 +74,7 @@ export default {
             },
           }]
         }
-      },
+      }
     },
     clearData() {
       return new Promise()
