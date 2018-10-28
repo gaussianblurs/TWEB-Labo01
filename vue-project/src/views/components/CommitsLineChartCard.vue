@@ -79,9 +79,7 @@ export default {
     clearData() {
       return new Promise()
         .then(() => {
-          this.dataCollection = {
-            datasets: []
-          }
+          this.dataCollection.datasets = []
         })
     },
   },
