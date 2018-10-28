@@ -1,5 +1,7 @@
 <template>
-  <pie-chart v-if="!loading" :chart-data="dataCollection"></pie-chart>
+  <div v-if="!loading">
+    <pie-chart :chart-data="dataCollection" :options="options"></pie-chart>
+  </div>
 </template>
 
 <script>
@@ -9,14 +11,13 @@ export default {
   components: {
     PieChart
   },
-  props: ['title'],
+  props: ['title', 'username'],
   data () {
     return {
       rawData: [],
       dataCollection: {
         labels: [],
         datasets: [{
-          label: "Languages",
           data: [],
           backgroundColor: [],
         }]
@@ -30,6 +31,7 @@ export default {
     this.fetchData()
     .then(() => this.fillData())
     .then(() => this.loading=false)
+    .then(console.log(`TITLE: ${this.title}`))
   },
   methods: {
     fetchData() {
@@ -46,8 +48,19 @@ export default {
         this.dataCollection.labels.push(Object.keys(language)[0])
         this.dataCollection.datasets[0].data.push(Object.values(language)[0])
         this.dataCollection.datasets[0].backgroundColor.push(this.colors[index])
-      })
-    },
+      }),
+      this.options = {
+        maintainAspectRatio: true,
+        title: {
+          display: true,
+          fontSize: 30,
+          fontFamily: 'Roboto',
+          fontStyle: '300',
+          fontColor: '#20313F',
+          text: this.title,
+        }
+      }
+    }
   }
 };
 </script>

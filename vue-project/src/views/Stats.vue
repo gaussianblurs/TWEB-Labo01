@@ -25,9 +25,12 @@
           <weekly-commits-line-chart-card  title="3 WEEKS COMMITS" :username="username" />
         </b-col>
       </b-row>
-      <b-row class="chart-container" v-if="!loading">
-        <b-col>
-          <languages-pie-chart-card  title="LANGUAGES" :username="username" />
+      <b-row class="mt-2">
+        <b-col class="chart-container mr-1">
+          <languages-pie-chart-card title="LANGUAGES" :username="username" />
+        </b-col>
+        <b-col class="chart-container ml-1">
+          <languages-pie-chart-card title="LANGUAGES" :username="username" />
         </b-col>
       </b-row>
       <b-row class="repo-select mt-2">

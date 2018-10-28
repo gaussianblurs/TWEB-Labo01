@@ -52,6 +52,7 @@ app.get('/users/:username', (req, res, next) => {
 app.get('/languages/:username', (req, res, next) => {
   client.userLanguages(req.query.token, req.params.username)
     .then(utils.getReposLanguagesStats)
+    .then(utils.mostPopularsLanguages)
     .then(stats => res.send(stats))
     .catch(next)
 })

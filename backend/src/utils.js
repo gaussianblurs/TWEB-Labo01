@@ -1,5 +1,3 @@
-const util = require('util')
-
 function getReposLanguagesStats(reposLanguages = []) {
   const stats = {}
   const countLanguages = o => {
@@ -13,6 +11,10 @@ function getReposLanguagesStats(reposLanguages = []) {
   return Object.keys(stats)
     .sort((a, b) => stats[a] - stats[b])
     .map(key => ({ [key]: stats[key] }))
+}
+
+function mostPopularsLanguages(languages = []) {
+  return languages.slice(languages.length - 7, languages.length)
 }
 
 function arrayUnique(array) {
@@ -101,4 +103,5 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
 module.exports = {
   getReposLanguagesStats,
   getWeeklyCommitsStats,
+  mostPopularsLanguages,
 }
