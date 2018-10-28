@@ -1,0 +1,46 @@
+[
+  {
+    "color": "rgba(46, 204, 113,1.0)",
+    "backgroundColor": "rgba(46, 204, 113,0.5)"
+  },
+  {
+    "color": "rgba(52, 152, 219,1.0)",
+    "backgroundColor": "rgba(52, 152, 219,0.5)"
+  },
+  {
+    "color": "rgba(155, 89, 182,1.0)",
+    "backgroundColor": "rgba(155, 89, 182,0.5)"
+  },
+  {
+    "color": "rgba(230, 126, 34,1.0)",
+    "backgroundColor": "rgba(230, 126, 34,0.5)"
+  },
+  {
+    "color": "rgba(52, 73, 94,1.0)",
+    "backgroundColor": "rgba(52, 73, 94,0.5)"
+  },
+  {
+    "color": "rgba(241, 196, 15,1.0)",
+    "backgroundColor": "rgba(241, 196, 15,0.5)"
+  },
+  {
+    "color": "rgba(231, 76, 60,1.0)",
+    "backgroundColor": "rgba(231, 76, 60,0.5)"
+  },
+  {
+    "color": "rgba(26, 188, 156,1.0)",
+    "backgroundColor": "rgba(26, 188, 156,0.5)"
+  },
+  {
+    "color": "rgba(245, 59, 87,1.0)",
+    "backgroundColor": "rgba(245, 59, 87,0.5)"
+  },
+  {
+    "color": "rgba(60, 64, 198,1.0)",
+    "backgroundColor": "rgba(60, 64, 198,0.5)"
+  },
+  {
+    "color": "rgba(30, 39, 46,1.0)",
+    "backgroundColor": "rgba(30, 39, 46,0.5)"
+  }
+]

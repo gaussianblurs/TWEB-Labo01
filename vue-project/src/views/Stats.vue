@@ -37,7 +37,7 @@
         <b-col>
           <h1 class="mt-2">Select a repo: </h1>
           <b-form-select class="mb-2" v-model="selectedRepo">
-            <option v-for="i in repos.length" :value="repos[i]">{{ repos[i] }}</option>
+            <option v-for="repo in repos" :value="repo">{{ repo }}</option>
           </b-form-select>
         </b-col>
       </b-row>
@@ -88,43 +88,42 @@ export default {
     fetchUser() {
       let token = window.localStorage.getItem('access_token')
       return axios.get(`/user?token=${token}`)
-      .then((response) => {
-        this.username = response.data.login
-        this.avatar = response.data.avatar_url
-        this.public_repos = response.data.public_repos
-        this.private_repos = response.data.total_private_repos
-        this.collaborators = response.data.collaborators
-        this.followers = response.data.followers
-      })
-      .catch((err) => {
-        console.log(err)
-        this.$router.push({ name: 'homepage' })
-      })
+        .then((response) => {
+          this.username = response.data.login
+          this.avatar = response.data.avatar_url
+          this.public_repos = response.data.public_repos
+          this.private_repos = response.data.total_private_repos
+          this.collaborators = response.data.collaborators
+          this.followers = response.data.followers
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$router.push({ name: 'homepage' })
+        })
     },
     fetchRepos() {
       let token = window.localStorage.getItem('access_token')
       return axios.get(`/repos?token=${token}`)
-      .then((response) => {
-        for(let rep in response.data) {
-          if(response.data[rep].name)
-            this.repos.push(response.data[rep].name)
-        }
-        this.selectedRepo = this.repos[0]
-      })
-      .catch((err) => {
-        console.log(err)
-        this.$router.push({ name: 'homepage' })
-      })
+        .then((response) => {
+          for(let rep in response.data) {
+            if(response.data[rep].name)
+              this.repos.push(response.data[rep].name)
+          }
+          this.selectedRepo = this.repos[0]
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$router.push({ name: 'homepage' })
+        })
     }
   },
   mounted() {
     this.fetchUser()
-    .then(() => this.fetchRepos())
-    .then(() =>  {
-      this.selectedRepo = this.repos[0]
-      this.loading = false
-    })
-    .then(() => console.log(`selectedRepo: ${this.selectedRepo}`))
+      .then(() => this.fetchRepos())
+      .then(() =>  {
+        this.consoleRepo = this.repos[0]
+        this.loading = false
+      })
   },
 }
 </script>

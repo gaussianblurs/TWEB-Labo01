@@ -7,6 +7,8 @@
 <script>
 import axios from '../../HTTP'
 import PieChart from './charts/PieChart'
+import Colors from '../../assets/data/colors.json';
+
 export default {
   components: {
     PieChart
@@ -14,6 +16,7 @@ export default {
   props: ['title', 'username'],
   data () {
     return {
+      colors: Colors,
       rawData: [],
       dataCollection: {
         labels: [],
@@ -23,7 +26,6 @@ export default {
         }]
       },
       options: {},
-      colors: ['#2ecc71','#1abc9c', '#3498db', '#9b59b6', '#f1c40f', '#e67e22', '#e74c3c', '#34495e'],
       loading: true
     }
   },
@@ -31,7 +33,6 @@ export default {
     this.fetchData()
     .then(() => this.fillData())
     .then(() => this.loading=false)
-    .then(console.log(`TITLE: ${this.title}`))
   },
   methods: {
     fetchData() {
@@ -43,11 +44,10 @@ export default {
       .catch(error => console.error(error))
     },
     fillData() {
-      let colorIndex = 0
       this.rawData.forEach((language, index) => {
         this.dataCollection.labels.push(Object.keys(language)[0])
         this.dataCollection.datasets[0].data.push(Object.values(language)[0])
-        this.dataCollection.datasets[0].backgroundColor.push(this.colors[index])
+        this.dataCollection.datasets[0].backgroundColor.push(this.colors[index].color)
       }),
       this.options = {
         maintainAspectRatio: true,

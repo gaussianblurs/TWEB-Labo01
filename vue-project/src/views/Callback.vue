@@ -24,14 +24,14 @@ export default {
   methods: {
     fetchToken() {
       axios.get(`/authenticate?code=${this.code}`)
-      .then((response) => {
-        window.localStorage.setItem('access_token', response.data.access_token)
-        this.$router.push({ name: 'stats' })
-      })
-      .catch((err) => {
-        console.log(err)
-        this.$router.push({ name: 'homepage' })
-      })
+        .then((response) => {
+          window.localStorage.setItem('access_token', response.data.access_token)
+          this.$router.push({ name: 'stats' })
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$router.push({ name: 'homepage' })
+        })
     },
   },
   mounted () {

@@ -36,8 +36,6 @@ function formatWeeklyCommitsStats(weeklyCommitsStats = []) {
       commitsStats.push(repo)
     }
   })
-  // console.log('COMMITSSTATS') // eslint-disable-line
-  // console.log(commitsStats) // eslint-disable-line
   let datesArray = []
   commitsStats.forEach((repo) => {
     console.log(repo) // eslint-disable-line

@@ -7,6 +7,7 @@
 <script>
 import axios from '../../HTTP'
 import LineChart from './charts/LineChart'
+import Colors from '../../assets/data/colors.json';
 
 export default {
   components: {
@@ -20,24 +21,7 @@ export default {
         datasets: []
       },
       options: {},
-      colors: [
-        'rgba(46, 204, 113,1.0)',
-        'rgba(241, 196, 15,1.0)',
-        'rgba(52, 152, 219,1.0)',
-        'rgba(231, 76, 60,1.0)',
-        'rgba(155, 89, 182,1.0)',
-        'rgba(52, 73, 94,1.0)',
-        'rgba(230, 126, 34,1.0)',
-        'rgba(26, 188, 156,1.0)'],
-        backgroundColors: [
-          'rgba(46, 204, 113,0.5)',
-          'rgba(241, 196, 15,0.5)',
-          'rgba(52, 152, 219,0.5)',
-          'rgba(231, 76, 60,0.5)',
-          'rgba(155, 89, 182,0.5)',
-          'rgba(52, 73, 94,0.5)',
-          'rgba(230, 126, 34,0.5)',
-          'rgba(26, 188, 156,0.5)'],
+      colors: Colors,
       loading: true,
     }
   },
@@ -50,14 +34,13 @@ export default {
     fetchData () {
       let token = window.localStorage.getItem('access_token')
       return axios.get(`/weekly_commits/${this.username}?token=${token}`)
-      .then((response) => {
-        this.rawData = response.data
-      })
-      .catch(error => console.error(error))
+        .then((response) => {
+          this.rawData = response.data
+        })
+        .catch(error => console.error(error))
     },
     fillData() {
-      let colorIndex = 0
-      this.rawData.forEach((repo) => {
+      this.rawData.forEach((repo, index) => {
         if(repo.commits.length > 0) {
           let data = []
           repo.commits.forEach(commit => {
@@ -69,12 +52,11 @@ export default {
           this.dataCollection.datasets.push({
             label: repo.name,
             fill: true,
-            backgroundColor: this.backgroundColors[colorIndex],
-            borderColor: this.colors[colorIndex],
-            pointBackgroundColor: this.colors[colorIndex],
+            backgroundColor: this.colors[index].backgroundColor,
+            borderColor: this.colors[index].color,
+            pointBackgroundColor: this.colors[index].color,
             data: data
           })
-          colorIndex++
         }
       })
       this.options = {
