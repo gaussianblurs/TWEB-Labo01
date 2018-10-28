@@ -38,7 +38,7 @@ export default {
   methods: {
     fetchData () {
       let token = window.localStorage.getItem('access_token')
-      return axios.get(`/commits/${this.username}/${this.reponame}?token=${token}`)
+      return axios.get(`/commits/${this.reponame}?token=${token}`)
         .then((response) => {
           this.rawData = response.data
         })
@@ -46,14 +46,16 @@ export default {
     },
     fillData() {
       this.dataCollection.datasets = []
-      this.dataCollection.datasets.push({
-        label: this.reponame,
-        data: this.rawData.map((el, index) => ({
-          t: Object.keys(el)[0],
-          y: Object.values(el)[0],
-        })),
-        borderColor: this.colors[0].color,
-        backgroundColor: this.colors[0].backgroundColor,
+      this.rawData.forEach((el, index) => {
+        this.dataCollection.datasets.push({
+          label: el.author,
+          data: el.commits.map(commit => ({
+            t: Object.keys(commit)[0],
+            y: Object.values(commit)[0],
+          })),
+          borderColor: this.colors[index].color,
+          backgroundColor: this.colors[index].backgroundColor,
+        })
       })
       console.log('data loaded')
       console.log(this.dataCollection.datasets[0])

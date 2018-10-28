@@ -66,8 +66,8 @@ app.get('/commits/:username', (req, res, next) => {
 })
 
 
-app.get('/commits/:username/:owner/:repo', (req, res, next) => {
-  client.repoUserCommits(req.query.token, req.params.username, `${req.params.owner}/${req.params.repo}`)
+app.get('/commits/:owner/:repo', (req, res, next) => {
+  client.repoCommits(req.query.token, `${req.params.owner}/${req.params.repo}`)
     .then(utils.getRepoCommitsStats)
     .then(stats => res.send(stats))
     .catch(next)
@@ -80,11 +80,13 @@ app.get('/weekly_commits/:username', (req, res, next) => {
     .catch(next)
 })
 
-app.get('/test/:username', (req, res, next) => {
-  client.lastThreeWeeksUserCommits(req.query.token, req.params.username)
+app.get('/topics/:owner/:repo', (req, res, next) => {
+  client.repoTopics(req.query.token, `${req.params.owner}/${req.params.repo}`)
     .then(result => res.send(result))
     .catch(next)
 })
+
+app.get('')
 
 // Forward 404 to error handler
 app.use((req, res, next) => {

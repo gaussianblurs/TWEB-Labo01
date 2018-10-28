@@ -73,8 +73,20 @@ class Github {
     return this.request(token, `/repos/${repoName}/languages`)
   }
 
+  repoCommits(token, repoName, page = 1, perPage = 100) {
+    return this.request(token, `/repos/${repoName}/commits?page=${page}&per_page=${perPage}`)
+  }
+
   repoUserCommits(token, username, repoName, page = 1, perPage = 100) {
     return this.request(token, `/repos/${repoName}/commits?page=${page}&per_page=${perPage}&author=${username}`)
+  }
+
+  repoTopics(token, repoName, page = 1, perPage = 100) {
+    return this.request(token, `/repos/${repoName}/topics?page=${page}&per_page=${perPage}`, {
+      headers: {
+        Accept: 'application/vnd.github.mercy-preview+json',
+      },
+    })
   }
 
   userCommits(token, username) {
