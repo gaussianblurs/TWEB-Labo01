@@ -42,7 +42,7 @@ npm install
 #install for production (without dev dependencies)
 npm run build
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:3000 (requires dev dependencies)
 npm run dev
 
 #serve for production
