@@ -84,6 +84,7 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
   }
 
   reposWeeklyCommits.forEach(countCommits)
+  console.log(stats)
   const commitsStats = formatWeeklyCommitsStats(stats)
   return commitsStats.map(el => (
     {
@@ -189,4 +190,6 @@ module.exports = {
   mostPopularRepos,
   getRepoCommitsStats,
   getContributorsStats,
+  formatWeeklyCommitsStats,
+  formatRepoCommitsStats,
 }
