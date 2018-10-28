@@ -1,11 +1,12 @@
 <template>
-  <div v-if="!loading">
-    <ul>
-      <li v-for="el in data">
-        <img :src="el.avatarUrl" />
-        <a :href="el.url">{{ el.username }}</a> / {{ el.totalCommits }}
-      </li>
-    </ul>
+  <div v-if="!loading" class="p-3">
+    <div v-for="el in data" class="d-inline-block p-2">
+      <b-img class="d-inline mr-2" rounded="circle" width="75" height="75" alt="img" :src="el.avatarUrl" />
+      <div class="contributor-infos d-inline-block">
+        <a :href="el.url">{{ el.username }}</a>
+        <h2><strong>{{ el.totalCommits }}</strong> COMMITS</h2>
+      </div>
+    </div>
   </div>
   <div v-else class="loading-spinner">
     <clip-loader :loading="loading" :color="'#2ecc71'" :size="'50px'"></clip-loader>
@@ -55,4 +56,5 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../assets/scss/chart.scss';
+  @import '../../assets/scss/contributorslist.scss';
 </style>

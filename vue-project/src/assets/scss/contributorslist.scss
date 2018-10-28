@@ -1,0 +1,25 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+img {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: $dark;
+}
+
+.contributor-infos {
+  font-family: 'Roboto', sans-serif;
+  color: $dark;
+  vertical-align: middle;
+
+  h2 {
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  a {
+    color: #2ecc71;
+    font-size: 18px;
+    font-weight: 400;
+  }
+}
