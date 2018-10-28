@@ -70,7 +70,6 @@ function formatWeeklyCommitsStats(weeklyCommitsStats = []) {
 }
 
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
-  return reposWeeklyCommits
   const stats = []
   const countCommits = o => {
     if (o.commits.length > 0) {
@@ -88,11 +87,7 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
   }
 
   reposWeeklyCommits.forEach(countCommits)
-  // console.log('RAW') // eslint-disable-line
-  // console.log(stats) // eslint-disable-line
   const commitsStats = formatWeeklyCommitsStats(stats)
-  // console.log('FORMATED') // eslint-disable-line
-  // console.log(commitsStats) // eslint-disable-line
   return commitsStats.map(el => (
     {
       name: el.name,

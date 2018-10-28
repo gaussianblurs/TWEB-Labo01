@@ -17,7 +17,6 @@ class Github {
 
   static nextPage(linkHeader) {
     if (!linkHeader) {
-      console.log('No header')
       return null
     }
     console.log('Header!')
@@ -28,8 +27,11 @@ class Github {
       return null
     }
     let nextUrl = headersArr[indexOfRelNext - 1]
-    nextUrl = nextUrl.slice(this.baseUrl.length + 1, -1)
-    console.log(`nextUrl: ${nextUrl}`)
+    console.log(`nextUrl BEFORE: ${nextUrl}`)
+    console.log(`first index: ${this.baseUrl.length + 1}`)
+    console.log(`second index: ${nextUrl.length - 1}`)
+    nextUrl = nextUrl.slice(this.baseUrl.length + 1, nextUrl.length - 1)
+    console.log(`nextUrl AFTER: ${nextUrl}`)
     return nextUrl
   }
 
