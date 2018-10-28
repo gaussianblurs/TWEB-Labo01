@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading">
+  <div v-if="!loading" class="chart">
     <pie-chart :chart-data="dataCollection" :options="options"></pie-chart>
   </div>
   <div v-else class="loading-spinner">
@@ -65,15 +65,7 @@ export default {
           fontStyle: '300',
           fontColor: '#20313F',
           text: this.title,
-        },
-        layout: {
-          padding: {
-            left: 0,
-            right: 0,
-            top: 5,
-            bottom: 10,
-          }
-        },
+        }
       }
     }
   }

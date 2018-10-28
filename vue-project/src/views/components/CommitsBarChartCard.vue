@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading">
+  <div v-if="!loading" class="chart">
     <bar-chart :chart-data="dataCollection" :options="options"></bar-chart>
   </div>
   <div v-else class="loading-spinner">
@@ -65,15 +65,7 @@ export default {
           fontStyle: '300',
           fontColor: '#20313F',
           text: this.title
-        },
-        layout: {
-          padding: {
-            left: 20,
-            right: 20,
-            top: 5,
-            bottom: 0,
-          }
-        },
+        }
       }
     },
     arrayUnique(array) {

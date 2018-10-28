@@ -1,5 +1,10 @@
+.chart {
+  margin: 10px;
+  margin-bottom: 15px;
+}
+
 .loading-spinner {
   position: absolute;
-  top: 25%;
+  top: calc(50% - 25px);
   right: 50%;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading">
+  <div v-if="!loading" class="chart">
     <line-chart :chart-data="dataCollection" :options="options"></line-chart>
   </div>
   <div v-else class="loading-spinner">
@@ -74,14 +74,6 @@ export default {
         },
         legend: {
           labels: {
-          }
-        },
-        layout: {
-          padding: {
-            left: 0,
-            right: 20,
-            top: 5,
-            bottom: 20,
           }
         },
         scales: {
