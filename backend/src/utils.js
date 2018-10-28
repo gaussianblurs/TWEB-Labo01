@@ -147,6 +147,7 @@ function mostPopularRepos(repos = []) {
 }
 
 function getRepoCommitsStats(repoCommits = []) {
+  console.log(repoCommits)
   const stats = {}
   repoCommits.forEach(el => {
     if (!stats[el.author.login]) {

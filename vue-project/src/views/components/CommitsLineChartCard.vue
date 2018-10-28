@@ -57,7 +57,6 @@ export default {
           backgroundColor: this.colors[index].backgroundColor,
         })
       })
-      console.log(this.dataCollection.datasets[0])
       this.options = {
         maintainAspectRatio: false,
         title: {
