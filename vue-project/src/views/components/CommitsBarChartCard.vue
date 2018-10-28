@@ -2,8 +2,8 @@
   <div v-if="!loading">
     <bar-chart :chart-data="dataCollection" :options="options"></bar-chart>
   </div>
-  <div v-else>
-    <h1>LOADING</h1>
+  <div v-else class="loading-spinner">
+    <clip-loader :loading="loading" :color="'#2ecc71'" :size="'50px'"></clip-loader>
   </div>
 </template>
 
@@ -11,10 +11,12 @@
 import axios from '../../HTTP'
 import BarChart from './charts/BarChart'
 import Colors from '../../assets/data/colors.json';
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 export default {
   components: {
-    BarChart
+    BarChart,
+    ClipLoader
   },
   props: ['title', 'username'],
   data() {
@@ -64,6 +66,14 @@ export default {
           fontColor: '#20313F',
           text: this.title
         },
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 5,
+            bottom: 0,
+          }
+        },
       }
     },
     arrayUnique(array) {
@@ -81,4 +91,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../../assets/scss/chart.scss';
 </style>

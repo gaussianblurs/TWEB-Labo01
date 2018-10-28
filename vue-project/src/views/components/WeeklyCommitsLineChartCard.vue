@@ -2,8 +2,8 @@
   <div v-if="!loading">
     <line-chart :chart-data="dataCollection" :options="options"></line-chart>
   </div>
-  <div v-else>
-    <h1>LOADING</h1>
+  <div v-else class="loading-spinner">
+    <clip-loader :loading="loading" :color="'#2ecc71'" :size="'50px'"></clip-loader>
   </div>
 </template>
 
@@ -11,10 +11,12 @@
 import axios from '../../HTTP'
 import LineChart from './charts/LineChart'
 import Colors from '../../assets/data/colors.json';
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 export default {
   components: {
-    LineChart
+    LineChart,
+    ClipLoader
   },
   props: ['title', 'username'],
   data() {
@@ -111,4 +113,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../../assets/scss/chart.scss';
 </style>

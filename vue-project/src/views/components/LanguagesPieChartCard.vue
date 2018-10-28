@@ -2,8 +2,8 @@
   <div v-if="!loading">
     <pie-chart :chart-data="dataCollection" :options="options"></pie-chart>
   </div>
-  <div v-else>
-    <h1>LOADING</h1>
+  <div v-else class="loading-spinner">
+    <clip-loader :loading="loading" :color="'#2ecc71'" :size="'50px'"></clip-loader>
   </div>
 </template>
 
@@ -11,10 +11,12 @@
 import axios from '../../HTTP'
 import PieChart from './charts/PieChart'
 import Colors from '../../assets/data/colors.json';
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 export default {
   components: {
-    PieChart
+    PieChart,
+    ClipLoader
   },
   props: ['title', 'username'],
   data () {
@@ -63,7 +65,15 @@ export default {
           fontStyle: '300',
           fontColor: '#20313F',
           text: this.title,
-        }
+        },
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            top: 5,
+            bottom: 10,
+          }
+        },
       }
     }
   }
@@ -71,4 +81,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../../assets/scss/chart.scss';
 </style>

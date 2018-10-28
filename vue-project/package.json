@@ -22,7 +22,8 @@
     "popper.js": "^1.12.9",
     "vue": "^2.5.3",
     "vue-chartjs": "^3.4.0",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-spinner": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
