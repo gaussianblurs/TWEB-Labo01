@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading">
     <ul>
-      <li v-for="el in data"><a :href="el.link">{{ el.username }}</a></li>
+      <li v-for="el in data"><a :href="el.link">{{ el.username }}</a> / {{ el.totalCommits }}</li>
     </ul>
   </div>
   <div v-else class="loading-spinner">
