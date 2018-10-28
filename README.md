@@ -52,7 +52,7 @@ npm start
 npm run lint
 
 #test server
-npm run test
+npm test
 
 ```
 
