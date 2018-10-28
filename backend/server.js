@@ -86,7 +86,12 @@ app.get('/topics/:owner/:repo', (req, res, next) => {
     .catch(next)
 })
 
-app.get('')
+app.get('/contributors/:owner/:repo', (req, res, next) => {
+  client.repoContributors(req.query.token, `${req.params.owner}/${req.params.repo}`)
+    .then(utils.getContributorsStats)
+    .then(result => res.send(result))
+    .catch(next)
+})
 
 // Forward 404 to error handler
 app.use((req, res, next) => {

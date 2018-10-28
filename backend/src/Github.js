@@ -89,6 +89,10 @@ class Github {
     })
   }
 
+  repoContributors(token, repoName, page = 1, perPage = 100) {
+    return this.request(token, `/repos/${repoName}/stats/contributors?page=${page}&per_page=${perPage}`)
+  }
+
   userCommits(token, username) {
     return this.reposUser(token)
       .then(repos => {

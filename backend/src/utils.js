@@ -135,6 +135,15 @@ function getRepoCommitsStats(repoCommits = []) {
     }))
 }
 
+function getContributorsStats(contributors = []) {
+  return contributors
+    .map(el => ({
+      author: el.author.login,
+      link: el.author.url,
+      totalCommits: el.total,
+    }))
+}
+
 module.exports = {
   getReposLanguagesStats,
   getWeeklyCommitsStats,
@@ -142,4 +151,5 @@ module.exports = {
   getReposCommitsStats,
   mostPopularRepos,
   getRepoCommitsStats,
+  getContributorsStats,
 }
