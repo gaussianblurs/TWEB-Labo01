@@ -25,6 +25,11 @@
           <weekly-commits-line-chart-card  title="3 WEEKS COMMITS" :username="username" />
         </b-col>
       </b-row>
+      <b-row class="chart-container" v-if="!loading">
+        <b-col>
+          <languages-pie-chart-card  title="LANGUAGES" :username="username" />
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -32,10 +37,12 @@
 <script>
 import axios from '../HTTP'
 import WeeklyCommitsLineChartCard from "./components/WeeklyCommitsLineChartCard"
+import LanguagesPieChartCard from "./components/LanguagesPieChartCard"
 
 export default {
   components: {
-    WeeklyCommitsLineChartCard
+    WeeklyCommitsLineChartCard,
+    LanguagesPieChartCard
   },
   data() {
     return {
@@ -70,7 +77,6 @@ export default {
       let token = window.localStorage.getItem('access_token')
       return axios.get(`/repos?token=${token}`)
       .then((response) => {
-        console.log(response.data)
         this.repos = response.data.repos
       })
       .catch((err) => {
