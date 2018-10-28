@@ -3,26 +3,50 @@
     <b-navbar type="dark" variant="info">
       <a class="mx-auto"><img class="nav-logo" src="../assets/nav-logo.svg"></a>
     </b-navbar>
-    <b-container>
-      <b-row class="title" align-h="between">
+    <b-container v-if="!loading">
+      <b-row class="title mt-2" align-h="between">
         <b-col cols="auto" class="mr-auto">
           <b-img rounded="circle" width="75" height="75" alt="img" class="my-3 mr-3 d-inline" :src="avatar" />
           <h1 class="d-inline">{{ username }}</h1>
         </b-col>
         <b-col cols="auto">
           <div class="user-infos d-inline-block">
-            <h2>{{ public_repos }} PUBLIC REPOS</h2>
-            <h2>{{ private_repos }} PRIVATE REPOS</h2>
+            <h2><strong>{{ public_repos }}</strong> PUBLIC REPOS</h2>
+            <h2><strong>{{ private_repos }}</strong> PRIVATE REPOS</h2>
           </div>
           <div class="user-infos d-inline-block ml-4">
-            <h2>{{ followers }} FOLLOWERS</h2>
-            <h2>{{ collaborators }} COLLABORATORS</h2>
+            <h2><strong>{{ followers }}</strong> FOLLOWERS</h2>
+            <h2><strong>{{ collaborators }}</strong> COLLABORATORS</h2>
           </div>
         </b-col>
       </b-row>
-      <b-row class="chart-container" v-if="!loading">
+      <b-row class="chart-container mt-2">
         <b-col>
           <weekly-commits-line-chart-card  title="3 WEEKS COMMITS" :username="username" />
+        </b-col>
+      </b-row>
+      <b-row class="repo-select mt-2">
+        <b-col>
+          <h1 class="mt-2">Select a repo: </h1>
+          <b-form-select class="mb-2" v-model="selectedRepo">
+            <option v-for="i in repos.length" :value="repos[i]">{{ repos[i] }}</option>
+          </b-form-select>
+        </b-col>
+      </b-row>
+      <b-row class="repo-charts-container mt-2">
+        <b-col class="chart-container mr-2">
+
+        </b-col>
+        <b-col class="chart-container">
+        </b-col>
+        <b-col class="chart-container ml-2">
+        </b-col>
+      </b-row>
+    </b-container>
+    <b-container v-else>
+      <b-row class="loading-container mt-2">
+        <b-col>
+          <h1>LOADING...</h1>
         </b-col>
       </b-row>
     </b-container>
@@ -46,6 +70,7 @@ export default {
       collaborators: '',
       followers: '',
       repos: [],
+      selectedRepo: null,
       loading: true,
     }
   },
@@ -70,8 +95,11 @@ export default {
       let token = window.localStorage.getItem('access_token')
       return axios.get(`/repos?token=${token}`)
       .then((response) => {
-        console.log(response.data)
-        this.repos = response.data.repos
+        for(let rep in response.data) {
+          if(response.data[rep].name)
+            this.repos.push(response.data[rep].name)
+        }
+        this.selectedRepo = this.repos[0]
       })
       .catch((err) => {
         console.log(err)
@@ -82,7 +110,11 @@ export default {
   mounted() {
     this.fetchUser()
     .then(() => this.fetchRepos())
-    .then(() => this.loading = false)
+    .then(() =>  {
+      this.selectedRepo = this.repos[0]
+      this.loading = false
+    })
+    .then(() => console.log(`selectedRepo: ${this.selectedRepo}`))
   },
 }
 </script>

@@ -20,7 +20,7 @@ export default {
         datasets: []
       },
       options: {},
-      colors: ['#2ecc71','#1abc9c', '#3498db', '#9b59b6', '#f1c40f', '#e67e22', '#e74c3c', '#34495e'],
+      colors: ['#2ecc71', '#f1c40f', '#3498db', '#9b59b6', '#1abc9c', '#e67e22', '#e74c3c', '#34495e'],
       loading: true
     }
   },
@@ -40,11 +40,10 @@ export default {
     },
     fillData() {
       let colorIndex = 0
-      this.rawData.forEach((repo, index) => {
+      this.rawData.forEach((repo) => {
         if(repo.commits.length > 0) {
           let data = []
           repo.commits.forEach(commit => {
-            //this.dataCollection.labels.push(Object.keys(commit)[0])
             data.push({
               t: Object.keys(commit)[0],
               y: Object.values(commit)[0],
@@ -54,8 +53,8 @@ export default {
             label: repo.name,
             fill: false,
             backgroundColor: 'transparent',
-            borderColor: this.colors[colorIndex],
-            pointBackgroundColor: this.colors[colorIndex],
+            borderColor: this.colors[colorIndex % this.colors.length],
+            pointBackgroundColor: this.colors[colorIndex % this.colors.length],
             data: data
           })
           colorIndex++
@@ -94,6 +93,16 @@ export default {
           }]
         }
       }
+    },
+    arrayUnique(array) {
+      var a = array.concat();
+      for(var i=0; i<a.length; ++i) {
+          for(var j=i+1; j<a.length; ++j) {
+              if(a[i] === a[j])
+                  a.splice(j--, 1);
+          }
+      }
+      return a;
     }
   }
 }

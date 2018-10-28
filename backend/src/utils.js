@@ -13,6 +13,58 @@ function getReposLanguagesStats(reposLanguages = []) {
     .map(key => ({ [key]: stats[key] }))
 }
 
+function arrayUnique(array) {
+  const a = array.concat()
+  for (let i = 0; i < a.length; ++i) {
+    for (let j = i + 1; j < a.length; ++j) {
+      if (a[i] === a[j]) {
+        a.splice(j--, 1) //eslint-disable-line
+      }
+    }
+  }
+  return a
+}
+
+function formatWeeklyCommitsStats(weeklyCommitsStats = []) {
+  const commitsStats = []
+  weeklyCommitsStats.forEach((repo) => {
+    if (Object.keys(repo.commits).length > 0) {
+      commitsStats.push(repo)
+    }
+  })
+  // console.log('COMMITSSTATS') // eslint-disable-line
+  // console.log(commitsStats) // eslint-disable-line
+  let datesArray = []
+  commitsStats.forEach((repo) => {
+    console.log(repo) // eslint-disable-line
+    Object.entries(repo.commits).forEach((commit) => {
+      datesArray.push(new Date(commit[0]))
+    })
+  })
+  datesArray = arrayUnique(datesArray)
+  const maxDate = new Date(Math.max.apply(null, datesArray))
+  const minDate = new Date(Math.min.apply(null, datesArray))
+
+  commitsStats.forEach((repo) => {
+    for (let d = (new Date(minDate)); d <= maxDate; d.setDate(d.getDate() + 1)) {
+      let date = d.toISOString()
+      date = date.substring(0, date.indexOf('T'))
+      let alreadyIn = false
+
+      Object.entries(repo.commits).forEach((commit) => {
+        if (date === commit[0]) {
+          alreadyIn = true
+        }
+      })
+
+      if (!alreadyIn) {
+        repo.commits[date] = 0 // eslint-disable-line
+      }
+    }
+  })
+  return commitsStats
+}
+
 function getWeeklyCommitsStats(reposWeeklyCommits = []) {
   const stats = []
   const countCommits = o => {
@@ -27,8 +79,14 @@ function getWeeklyCommitsStats(reposWeeklyCommits = []) {
       stats[stats.length - 1].commits[date] = current + 1
     })
   }
+
   reposWeeklyCommits.forEach(countCommits)
-  return stats.map(el => (
+  // console.log('RAW') // eslint-disable-line
+  // console.log(stats) // eslint-disable-line
+  const commitsStats = formatWeeklyCommitsStats(stats)
+  // console.log('FORMATED') // eslint-disable-line
+  // console.log(commitsStats) // eslint-disable-line
+  return commitsStats.map(el => (
     {
       name: el.name,
       commits: Object.keys(el.commits)
