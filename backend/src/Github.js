@@ -64,12 +64,12 @@ class Github {
     return this.request(token, '/user')
   }
 
-  reposUser(token) {
-    return this.request(token, '/user/repos')
+  reposUser(token, page = 1, perPage = 100) {
+    return this.request(token, `/user/repos?page=${page}&per_page=${perPage}`)
   }
 
-  repoLanguages(token, repoName) {
-    return this.request(token, `/repos/${repoName}/languages`)
+  repoLanguages(token, repoName, page = 1, perPage = 100) {
+    return this.request(token, `/repos/${repoName}/languages?page=${page}&per_page=${perPage}`)
   }
 
   repoCommits(token, repoName, page = 1, perPage = 100) {
