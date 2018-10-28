@@ -14,6 +14,20 @@ class Github {
     this.baseUrl = baseUrl
   }
 
+  static nextPage(linkHeader) {
+    if (!linkHeader) {
+      return null
+    }
+    const headersArr = [].concat(...linkHeader.split(',').map(el => el.split(';'))).map(el => el.trim())
+    const indexOfRelNext = headersArr.findIndex(el => el === 'rel="next"')
+    if (indexOfRelNext === -1) {
+      return null
+    }
+    let nextUrl = headersArr[indexOfRelNext - 1]
+    nextUrl = nextUrl.substring(this.baseUrl.length, nextUrl.length - 1)
+    return nextUrl
+  }
+
   request(token, path, opts = {}) {
     const url = `${this.baseUrl}${path}`
     const options = {
@@ -25,54 +39,47 @@ class Github {
       },
     }
 
+    const acc = []
     return fetch(url, options)
-      .then((res) => {
+      .then(res => {
         if (!res.ok) {
           throw new ResponseError(res, res.json())
         }
         return res
       })
+      .then(res => res.json()
+        .then(body => {
+          acc.push(body)
+          const nextPage = this.constructor.nextPage(res.headers.get('link'))
+          if (nextPage) {
+            return this.request(token, nextPage, options)
+          }
+          return [].concat(...acc)
+        }))
   }
 
   user(token) {
     return this.request(token, '/user')
-      .then(res => res.json())
   }
 
   users(token, username) {
     return this.request(token, `/users/${username}`)
-      .then(res => res.json())
   }
 
   reposUser(token) {
     return this.request(token, '/user/repos')
-      .then(res => res.json())
   }
 
   repoLanguages(token, repoName) {
     return this.request(token, `/repos/${repoName}/languages`)
-      .then(res => res.json())
   }
 
   repoUserCommits(token, username, repoName) {
     return this.request(token, `/repos/${repoName}/commits`)
-      .then(res => res.json())
   }
 
-  repoUserCommitsSince(token, username, repoName, stringDate, acc = [], page = 1) {
-    return this.request(token, `/repos/${repoName}/commits?page=${page}&per_page=100&since=${stringDate}&author=${username}`)
-      .then(res => res.json()
-        .then(body => {
-          acc.push(body)
-          const linkHeader = res.headers.get('link')
-          if (linkHeader) {
-            const headersArr = [].concat(...linkHeader.split(',').map(el => el.split(';'))).map(el => el.trim())
-            if (headersArr.findIndex(el => el === 'rel="next"') !== -1) {
-              return this.repoUserCommitsSince(token, username, repoName, stringDate, acc, page + 1)
-            }
-          }
-          return [].concat(...acc)
-        }))
+  repoUserCommitsSince(token, username, repoName, stringDate) {
+    return this.request(token, `/repos/${repoName}/commits?page=1&per_page=100since=${stringDate}&author=${username}`)
   }
 
   userLanguages(token) {

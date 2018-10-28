@@ -1,3 +1,5 @@
+const util = require('util')
+
 function getReposLanguagesStats(reposLanguages = []) {
   const stats = {}
   const countLanguages = o => {
