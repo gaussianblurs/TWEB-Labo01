@@ -147,17 +147,18 @@ function mostPopularRepos(repos = []) {
 }
 
 function getRepoCommitsStats(repoCommits = []) {
-  console.log(repoCommits)
   const stats = {}
   repoCommits.forEach(el => {
-    if (!stats[el.author.login]) {
+    if (el.author && !stats[el.author.login]) {
       stats[el.author.login] = {}
     }
   })
   const countCommits = o => {
-    const date = o.commit.author.date.substring(0, o.commit.author.date.indexOf('T'))
-    const current = stats[o.author.login][date] || 0
-    stats[o.author.login][date] = current + 1
+    if (o.author) {
+      const date = o.commit.author.date.substring(0, o.commit.author.date.indexOf('T'))
+      const current = stats[o.author.login][date] || 0
+      stats[o.author.login][date] = current + 1
+    }
   }
   repoCommits.forEach(countCommits)
   const commitsStats = formatRepoCommitsStats(stats)
