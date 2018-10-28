@@ -33,7 +33,7 @@
           <commits-bar-chart-card title="COMMITS/REPO" :username="username" />
         </b-col>
       </b-row>
-      <b-row class="repo-select mt-2">
+      <b-row v-if="!loading" class="repo-select mt-2">
         <b-col>
           <h1 class="mt-2">Select a repo: </h1>
           <b-form-select class="mb-2" v-model="selectedRepo">
@@ -41,20 +41,13 @@
           </b-form-select>
         </b-col>
       </b-row>
-      <b-row class="repo-charts-container mt-2">
+      <b-row v-if="!loading" class="repo-charts-container mt-2">
         <b-col class="chart-container mr-2">
 
         </b-col>
         <b-col class="chart-container">
         </b-col>
         <b-col class="chart-container ml-2">
-        </b-col>
-      </b-row>
-    </b-container>
-    <b-container v-else>
-      <b-row class="loading-container mt-2">
-        <b-col>
-          <h1>LOADING...</h1>
         </b-col>
       </b-row>
     </b-container>

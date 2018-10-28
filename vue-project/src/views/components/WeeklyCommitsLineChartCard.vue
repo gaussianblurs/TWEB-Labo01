@@ -2,6 +2,9 @@
   <div v-if="!loading">
     <line-chart :chart-data="dataCollection" :options="options"></line-chart>
   </div>
+  <div v-else>
+    <h1>LOADING</h1>
+  </div>
 </template>
 
 <script>
