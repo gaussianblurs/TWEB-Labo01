@@ -30,14 +30,14 @@
           <languages-pie-chart-card title="LANGUAGES" :username="username" />
         </b-col>
         <b-col class="chart-container ml-1">
-          <languages-pie-chart-card title="LANGUAGES" :username="username" />
+          <commits-bar-chart-card title="COMMITS/REPO" :username="username" />
         </b-col>
       </b-row>
       <b-row class="repo-select mt-2">
         <b-col>
           <h1 class="mt-2">Select a repo: </h1>
           <b-form-select class="mb-2" v-model="selectedRepo">
-            <option v-for="i in repos.length" :value="repos[i]">{{ repos[i] }}</option>
+            <option v-for="repo in repos" :value="repo">{{ repo }}</option>
           </b-form-select>
         </b-col>
       </b-row>
@@ -65,11 +65,13 @@
 import axios from '../HTTP'
 import WeeklyCommitsLineChartCard from "./components/WeeklyCommitsLineChartCard"
 import LanguagesPieChartCard from "./components/LanguagesPieChartCard"
+import CommitsBarChartCard from "./components/CommitsBarChartCard"
 
 export default {
   components: {
     WeeklyCommitsLineChartCard,
-    LanguagesPieChartCard
+    LanguagesPieChartCard,
+    CommitsBarChartCard,
   },
   data() {
     return {
@@ -107,7 +109,7 @@ export default {
       .then((response) => {
         for(let rep in response.data) {
           if(response.data[rep].name)
-            this.repos.push(response.data[rep].name)
+            this.repos.push(response.data[rep].full_name)
         }
         this.selectedRepo = this.repos[0]
       })

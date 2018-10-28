@@ -60,6 +60,7 @@ app.get('/languages/:username', (req, res, next) => {
 app.get('/commits/:username', (req, res, next) => {
   client.userCommits(req.query.token, req.params.username)
     .then(utils.getReposCommitsStats)
+    .then(utils.mostPopularRepos)
     .then(stats => res.send(stats))
     .catch(next)
 })
