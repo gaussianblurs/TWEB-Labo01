@@ -73,5 +73,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../assets/scss/chart.scss';
+@import '../../assets/scss/chart.scss';
 </style>
