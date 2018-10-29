@@ -10,7 +10,7 @@ The app was designed with simplicity in mind, bringing powerful information to t
 all this, the key term of TechnoGraphy is "elegance".  
 
 The app is fully responsive, and powered by [Vue.js](https://vuejs.org/)   
-The graphs were generated with [Chart.js]((https://www.chartjs.org/)
+The graphs were generated with [Chart.js](https://www.chartjs.org/)
 
 The current build is hosted on [Zeit Now](https://zeit.co/now) and the backend on [Heroku](https://www.heroku.com/), and is accessible [here](https://technography-cimyyttbvv.now.sh/)
 
@@ -52,6 +52,7 @@ npm start
 npm run lint
 
 #test server
+#first get an OAuth token from Gtihub and place it in a .env file like so: OAUTH_TOKEN=xxx
 npm test
 
 ```
