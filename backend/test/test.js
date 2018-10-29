@@ -36,6 +36,5 @@ describe('Github', () => {
       }, error => {
         done(error)
       })
-      .catch(err => console.error(err))
   })
 })
