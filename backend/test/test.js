@@ -27,15 +27,14 @@ describe('formatWeeklyCommitsStats', () => {
 })
 
 describe('Github', () => {
-  it('Handles pagination', () => {
+  it('Handles pagination', (done) => {
     const client = new Github()
-    client.repoCommits(process.env.OAUTH_TOKEN, 'gaussianblurs/TWEB-Project01', 2, 1)
+    client.repoCommits(process.env.OAUTH_TOKEN, 'gaussianblurs/TWEB-Project01', 2, 80)
       .then(data => {
         assert(data.length > 1)
         done()
       }, error => {
         done(error)
       })
-      .catch(err => console.log(err))
   })
 })
