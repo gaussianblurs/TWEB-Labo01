@@ -27,10 +27,11 @@ describe('formatWeeklyCommitsStats', () => {
   })
 })
 
-describe('Github', () => {
+describe('Github', function () {
+  this.timeout(5000)
   it('Handles pagination', done => {
     const client = new Github()
-    client.repoCommits(process.env.OAUTH_TOKEN, 'gaussianblurs/TWEB-Project01', 2, 80)
+    client.repoCommits(process.env.OAUTH_TOKEN, 'gaussianblurs/TWEB-Project01', 2, 40)
       .then(data => {
         assert(data.length > 1)
         done()
