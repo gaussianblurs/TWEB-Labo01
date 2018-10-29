@@ -27,6 +27,7 @@ describe('formatWeeklyCommitsStats', () => {
   })
 })
 
+/* eslint-disable-next-line func-names */
 describe('Github', function () {
   this.timeout(5000)
   it('Handles pagination', done => {
