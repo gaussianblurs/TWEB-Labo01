@@ -27,7 +27,7 @@ describe('formatWeeklyCommitsStats', () => {
 })
 
 describe('Github', () => {
-  it('Handles pagination', (done) => {
+  it('Handles pagination', done => {
     const client = new Github()
     client.repoCommits(process.env.OAUTH_TOKEN, 'gaussianblurs/TWEB-Project01', 2, 80)
       .then(data => {
