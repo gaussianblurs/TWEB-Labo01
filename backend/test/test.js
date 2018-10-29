@@ -1,11 +1,8 @@
 /* eslint-disable no-undef */
 const assert = require('assert')
-<<<<<<< HEAD
 const utils = require('../src/utils.js')
-=======
 const Github = require('../src/Github')
 require('../node_modules/dotenv').config()
->>>>>>> b02a2ea918766650c2757895a065f9e950aff817
 
 describe('YOLO', () => {
   it('NO TIME', () => {
@@ -13,27 +10,22 @@ describe('YOLO', () => {
   })
 })
 
-<<<<<<< HEAD
 describe('formatWeeklyCommitsStats', () => {
   it('should fill dates between oldest and latest with 0 commits', () => {
     const a = [
       {
-        name: 'repoTest',
-        commits: [
-          { '2018-10-12': 8 },
-          { '2018-10-16': 2 },
-        ],
+        name: 'Aksumiron/test',
+        commits: {
+          '2018-10-12': 2,
+          '2018-10-16': 2,
+        },
       },
     ]
-    console.log(a[0])
     const b = utils.formatWeeklyCommitsStats(a)
-    console.log(b[0])
+    assert((Object.entries(a[0].commits).length - Object.entries(b[0].commits).length) !== 3)
+  })
+})
 
-    console.log(`a.length = ${a[0].commits.length}`)
-    console.log(`b.length = ${b[0].commits.length}`)
-
-    assert((a[0].commits.length - b[0].commits.length) === 4)
-=======
 describe('Github', () => {
   it('Handles pagination', () => {
     const client = new Github()
@@ -44,6 +36,5 @@ describe('Github', () => {
       }, error => {
         done(error)
       })
->>>>>>> b02a2ea918766650c2757895a065f9e950aff817
   })
 })
