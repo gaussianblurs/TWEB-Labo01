@@ -33,7 +33,7 @@ function formatWeeklyCommitsStats(weeklyCommitsStats = []) {
   const commitsStats = []
   weeklyCommitsStats.forEach((repo) => {
     if (Object.keys(repo.commits).length > 0) {
-      commitsStats.push(repo)
+      commitsStats.push(JSON.parse(JSON.stringify(repo)))
     }
   })
   let datesArray = []

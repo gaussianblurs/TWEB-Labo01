@@ -14,7 +14,7 @@ describe('formatWeeklyCommitsStats', () => {
   it('should fill dates between oldest and latest with 0 commits', () => {
     const a = [
       {
-        name: 'Aksumiron/test',
+        name: 'repo',
         commits: {
           '2018-10-12': 2,
           '2018-10-16': 2,
@@ -22,7 +22,8 @@ describe('formatWeeklyCommitsStats', () => {
       },
     ]
     const b = utils.formatWeeklyCommitsStats(a)
-    assert((Object.entries(a[0].commits).length - Object.entries(b[0].commits).length) !== 3)
+    const diff = (Object.entries(b[0].commits).length - Object.entries(a[0].commits).length)
+    assert.deepStrictEqual(diff, 3) // eslint-disable-line
   })
 })
 
